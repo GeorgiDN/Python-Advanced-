@@ -7,4 +7,4 @@ Online judge system - https://judge.softuni.org/
 
 ## Table of Contents:
 
-➡
+➡[Lists as Stacks and Queues - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Lists%20as%20Stacks%20and%20Queues%20-%20Lab)
