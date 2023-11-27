@@ -12,3 +12,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Lists as Stacks and Queues - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Lists%20as%20Stacks%20and%20Queues%20-%20Exercise)
 
 ➡[Tuples and Sets - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Tuples%20and%20Sets%20-%20Lab)
+
+➡[Tuples and Sets - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Tuples%20and%20Sets%20-%20Exercise)
