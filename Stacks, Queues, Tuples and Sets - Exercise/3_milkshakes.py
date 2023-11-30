@@ -35,4 +35,54 @@ if milk_cups:
     print(f"Milk: {', '.join([str(cup) for cup in milk_cups])}")
 else:
     print("Milk: empty")
+
+
+
+
+
+
+# chocolate = list(int(el) for el in input().split(", "))
+# cups_of_milk = list(int(el) for el in input().split(", "))
+
+
+# milk_shakes = 0
+# for num1 in reversed(chocolate):
+#     if milk_shakes == 5:
+#         break
+#     for num2 in cups_of_milk:
+#         if num1 == num2:
+#             chocolate.pop()
+#             cups_of_milk.remove(num2)
+#             milk_shakes += 1
+#             break
+
+#         elif num1 <= 0:
+#             chocolate.remove(num1)
+#             break
+#         elif num2 <= 0:
+#             cups_of_milk.remove(num2)
+#             break
+
+#         elif num1 != num2:
+#             element_to_move = num2
+#             cups_of_milk.remove(element_to_move)
+#             cups_of_milk.append(element_to_move)
+#             index = chocolate.index(num1)
+#             chocolate[index] -= 5
+#             break
+
+# if milk_shakes == 5:
+#     print("Great! You made all the chocolate milkshakes needed!")
+# elif milk_shakes < 5:
+#     print("Not enough milkshakes.")
+
+# if chocolate:
+#     print(f"Chocolate: {', '.join(map(str, chocolate))}")
+# else:
+#     print("Chocolate: empty")
+
+# if cups_of_milk:
+#     print(f"Milk: {', '.join(map(str, cups_of_milk))}")
+# else:
+#     print("Milk: empty")
   
