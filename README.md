@@ -14,3 +14,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Tuples and Sets - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Tuples%20and%20Sets%20-%20Lab)
 
 ➡[Tuples and Sets - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Tuples%20and%20Sets%20-%20Exercise)
+
+➡[Stacks, Queues, Tuples and Sets - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Stacks,%20Queues,%20Tuples%20and%20Sets%20-%20Exercise)
