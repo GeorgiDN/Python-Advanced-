@@ -18,3 +18,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Stacks, Queues, Tuples and Sets - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Stacks,%20Queues,%20Tuples%20and%20Sets%20-%20Exercise)
 
 ➡[Multidimensional Lists - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Multidimensional%20Lists%20-%20Lab)
+
+➡[Multidimensional Lists - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Multidimensional%20Lists%20-%20Exercise%201)
