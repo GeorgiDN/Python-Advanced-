@@ -22,3 +22,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Multidimensional Lists - Exercise 1](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Multidimensional%20Lists%20-%20Exercise%201)
 
 ➡[Multidimensional Lists - Exercise 2](https://github.com/GeorgiDN/Python-Advanced-/blob/main/Multidimensional%20Lists%20-%20Exercise%202/1_flatten_lists.py)
+
+➡[Functions Advanced - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Functions%20Advanced%20-%20Lab)
