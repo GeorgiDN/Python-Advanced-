@@ -20,3 +20,23 @@ print(even_odd_filter(
     even=[3, 4, 5, 7, 10, 2, 5, 5, 2],
 ))
 
+
+
+#######
+# def even_odd_filter(**kwargs):
+#     numbers = {}
+
+#     if "even" in kwargs:
+#         match_even = list(filter(lambda x: x % 2 == 0, kwargs["even"]))
+#         numbers["even"] = match_even
+
+#     if "odd" in kwargs:
+#         match_odd = list(filter(lambda x: x % 2 != 0, kwargs["odd"]))
+#         numbers["odd"] = match_odd
+
+#     return dict(sorted(numbers.items(), key=lambda x: -len(x[1])))
+
+# print(even_odd_filter(
+#     odd=[1, 2, 3, 4, 10, 5],
+#     even=[3, 4, 5, 7, 10, 2, 5, 5, 2],
+# ))
