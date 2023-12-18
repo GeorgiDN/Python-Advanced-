@@ -26,3 +26,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Functions Advanced - Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Functions%20Advanced%20-%20Lab)
 
 ➡[Functions Advanced - Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Functions%20Advanced%20-%20Exercise)
+
+➡[Error Handling-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Error%20Handling-Lab)
