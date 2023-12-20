@@ -30,3 +30,5 @@ Online judge system - https://judge.softuni.org/
 ➡[Error Handling-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Error%20Handling-Lab)
 
 ➡[Error Handling-Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Error%20Handling-Exercise)
+
+➡[File Handling-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/File%20Handling-Lab)
