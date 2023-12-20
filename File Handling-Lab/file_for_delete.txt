@@ -1,0 +1,8 @@
+This file will be deleted when this code is started:
+
+import os
+
+try:
+    os.remove("file_for_delete.txt")
+except FileNotFoundError:
+    print("File already deleted or doesn't exist!")
