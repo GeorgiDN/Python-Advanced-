@@ -1,0 +1,4 @@
+This is my first line.
+Multiple line
+Add line to a list
+And we use .writelines()
