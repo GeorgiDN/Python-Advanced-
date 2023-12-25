@@ -34,3 +34,5 @@ Online judge system - https://judge.softuni.org/
 ➡[File Handling-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/File%20Handling-Lab)
 
 ➡[File Handling-Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/File%20Handling-Exercise)
+
+➡[Modules](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules)
