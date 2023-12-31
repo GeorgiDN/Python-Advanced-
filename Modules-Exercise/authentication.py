@@ -69,4 +69,3 @@ def render_register():
 def render_main_enter_screen():
     Button(tk, text="Login", bg="green", fg="white", command=render_login).grid(row=0, column=0)
     Button(tk, text="Register", bg="yellow", command=render_register).grid(row=0, column=1)
-  
