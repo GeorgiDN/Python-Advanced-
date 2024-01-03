@@ -47,3 +47,4 @@ Online judge system - https://judge.softuni.org/
 
 ➡[Comperhension-Exercise](https://github.com/GeorgiDN/Python-Advanced-/blob/main/Comperhensions%20-%20Exercise/5_diagonals.py)
 
+➡[Exam Preparation](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Exam%20Preparation)
