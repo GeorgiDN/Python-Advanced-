@@ -19,6 +19,20 @@ print(f"Last is {players.popleft()}")
 
 
 
+# from collections import deque
+
+# players = input().split()
+# step = int(input())
+# players = deque(players)
+
+
+# while len(players) > 1:
+#     players.rotate(-step + 1)
+#     print(f"Removed {players.popleft()}")
+
+# print(f"Last is {players.popleft()}")
+
+
 
 # from collections import deque
 
