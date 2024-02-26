@@ -18,6 +18,25 @@ while len(players) > 1:
 print(f"Last is {players.popleft()}")
 
 
+
+
+# from collections import deque
+
+# players = input().split()
+# step = int(input())
+# players = deque(players)
+
+
+# while len(players) > 1:
+#     for _ in range(step - 1):
+#         players.append(players.popleft())
+#     print(f"Removed {players.popleft()}")
+
+# print(f"Last is {players.popleft()}")
+
+
+
+
 # from _collections import deque
 
 # name_of_players = input().split(' ')
