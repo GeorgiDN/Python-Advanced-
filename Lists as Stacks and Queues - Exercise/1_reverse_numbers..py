@@ -7,3 +7,7 @@ while len(numbers) > 0:
 
 # numbers = list(map(int, input().split()))
 # print(' '.join(map(str, numbers[::-1])))
+
+
+    
+# print(' '.join(map(str, map(int, input().split()[::-1]))))
