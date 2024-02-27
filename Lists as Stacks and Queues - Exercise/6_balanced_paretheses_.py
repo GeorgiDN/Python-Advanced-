@@ -2,13 +2,13 @@ parenthesis = input()
 
 my_stack = []
 is_balanced = True
-mapping = {"(": ")", "{": "}", "[": "]"}
+valid_parentheses = {"(": ")", "{": "}", "[": "]"}
 
-for ch in parenthesis:
-    if ch in "({[":
-        my_stack.append(ch)
+for bracket in parenthesis:
+    if bracket in "([{":
+        my_stack.append(bracket)
     else:
-        if not my_stack or ch != mapping[my_stack.pop()]:
+        if not my_stack or bracket != valid_parentheses[my_stack.pop()]:
             is_balanced = False
             break
 
