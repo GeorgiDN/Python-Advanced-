@@ -1,22 +1,22 @@
 from collections import deque
 
-pumps_quantity = int(input())
-pumps_info = deque()
+pumps_count = int(input())
+pumps_data = deque()
 
-for _ in range(pumps_quantity):
+for _ in range(pumps_count):
     pumps = [int(el) for el in input().split(" ")]
-    pumps_info.append(pumps)
+    pumps_data.append(pumps)
 
-for pump in range(pumps_quantity):
+for pump in range(pumps_count):
     tank = 0
-    is_ok_condition = True
-    for p in range(pumps_quantity):
-        tank += pumps_info[p][0] - pumps_info[p][1]
+    circle_is_completed = True
+    for p in range(pumps_count):
+        tank += pumps_data[p][0] - pumps_data[p][1]
         if tank < 0:
-            is_ok_condition = False
-            pumps_info.append(pumps_info.popleft())
+            circle_is_completed = False
+            pumps_data.append(pumps_data.popleft())
             break
 
-    if is_ok_condition:
+    if circle_is_completed:
         print(f"{pump}")
         break
