@@ -1,29 +1,18 @@
-from _collections import deque
+from collections import deque
 
-food_quantity = int(input())
-orders = list(map(int, input().split(' ')))
-orders_deque = deque(orders)
-biggest_order = max(orders_deque)
+total_sum = int(input())
+orders = deque(map(int, input().split(" ")))
+print(max(orders))
 
-# while len(orders_deque) > 1:
-for _ in range(len(orders_deque)):
-    if food_quantity <= 0:
-        break
-    current_order = orders_deque[0]
-
-    if current_order <= food_quantity:
-        food_quantity -= current_order
-        orders_deque.popleft()
+for _ in range(len(orders)):
+    current_order = orders.popleft()
+    if current_order <= total_sum:
+        total_sum -= current_order
     else:
-        pass
+        orders.insert(0, current_order)
 
-
-print(biggest_order)
-
-if len(orders_deque) > 0:
-    remaining_orders = " ".join(map(str, orders_deque))
-    print(f"Orders left: {remaining_orders}")
-
+if orders:
+    print(f"Orders left: {' '.join(map(str, orders))}")
 else:
     print("Orders complete")
-  
+
