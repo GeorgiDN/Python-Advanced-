@@ -1,12 +1,23 @@
+from collections import Counter
+
 list_numbers = [float(x) for x in input().split()]
-occurrences = {}
-
-for num in list_numbers:
-    if num not in occurrences:
-        occurrences[num] = 0
-    occurrences[num] += 1
-
+occurrences = Counter(list_numbers)
 print("\n".join([f"{x} - {y} times" for x, y in occurrences.items()]))
+
+
+
+
+# list_numbers = [float(x) for x in input().split()]
+# occurrences = {}
+
+# for num in list_numbers:
+#     if num not in occurrences:
+#         occurrences[num] = 0
+#     occurrences[num] += 1
+
+# print("\n".join([f"{x} - {y} times" for x, y in occurrences.items()]))
+
+
 
 
 
