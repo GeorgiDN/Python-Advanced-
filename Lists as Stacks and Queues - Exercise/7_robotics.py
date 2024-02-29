@@ -1,15 +1,15 @@
 from collections import deque
 
 
-def time_to_seconds(time):
+def time_in_seconds(time):
     hours, minutes, seconds = list(map(int, time.split(":")))
-    return hours * 60 * 60 + minutes * 60 + seconds
+    return hours * 3600 + minutes * 60 + seconds
 
 
 def formatted_time(seconds):
-    hours = seconds // (60 * 60) % 24
-    minutes = (seconds % (60 * 60)) // 60
-    seconds = (seconds % (60 * 60)) % 60
+    hours = seconds // 3600 % 24
+    minutes = (seconds % 3600) // 60
+    seconds = (seconds % 3600) % 60
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
 
@@ -21,7 +21,7 @@ for item in robots_info:
     robots.append([name, int(process_time), int(process_time), "free"])
 
 time = input()
-time_in_seconds = time_to_seconds(time)
+time_in_seconds = time_in_seconds(time)
 products_queue = deque()
 while True:
     product = input()
@@ -50,15 +50,121 @@ while products_queue:
 
 
 
+
+# from collections import deque
+#
+#
+# def time_to_seconds(time):
+#     hours, minutes, seconds = list(map(int, time.split(":")))
+#     return hours * 60 * 60 + minutes * 60 + seconds
+#
+#
+# def formatted_time(seconds):
+#     hours = seconds // (60 * 60) % 24
+#     minutes = (seconds % (60 * 60)) // 60
+#     seconds = (seconds % (60 * 60)) % 60
+#     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+#
+#
+# robots_info = input().split(";")
+# robots = []
+#
+# for item in robots_info:
+#     name, process_time = item.split("-")
+#     robots.append([name, int(process_time), int(process_time), "free"])
+#
+# time = input()
+# time_in_seconds = time_to_seconds(time)
+# products_queue = deque()
+# while True:
+#     product = input()
+#     if product == "End":
+#         break
+#     products_queue.append(product)
+#
+# while products_queue:
+#     time_in_seconds += 1
+#     current_product = products_queue.popleft()
+#     for robot in robots:
+#         robot_name = robot[0]
+#         status = robot[3]
+#         if status == "free":
+#             robot[3] = "busy"
+#             print(f"{robot_name} - {current_product} [{formatted_time(time_in_seconds)}]")
+#             break
+#     else:
+#         products_queue.append(current_product)
+#     for robot in robots:
+#         if robot[3] == "busy":
+#             robot[2] -= 1
+#         if robot[2] <= 0:
+#             robot[3] = "free"
+#             robot[2] = robot[1]
+
+
+
+
+# 83/100
+# from collections import deque
+#
+#
+# def time_to_seconds(time):
+#     hours, minutes, seconds = list(map(int, time.split(":")))
+#     return hours * 3600 + minutes * 60 + seconds
+#
+#
+# def formatted_time(seconds):
+#     minutes, seconds = divmod(seconds, 60)
+#     hours, minutes = divmod(minutes, 60)
+#     return "%02d:%02d:%02d" % (hours, minutes, seconds)
+#
+#
+# robots_info = input().split(";")
+# robots = []
+#
+# for item in robots_info:
+#     name, process_time = item.split("-")
+#     robots.append([name, int(process_time), int(process_time), "free"])
+#
+# time = input()
+# time_in_seconds = time_to_seconds(time)
+# products_queue = deque()
+# while True:
+#     product = input()
+#     if product == "End":
+#         break
+#     products_queue.append(product)
+#
+# while products_queue:
+#     time_in_seconds += 1
+#     current_product = products_queue.popleft()
+#     for robot in robots:
+#         robot_name = robot[0]
+#         status = robot[3]
+#         if status == "free":
+#             robot[3] = "busy"
+#             print(f"{robot_name} - {current_product} [{formatted_time(time_in_seconds)}]")
+#             break
+#     else:
+#         products_queue.append(current_product)
+#     for robot in robots:
+#         if robot[3] == "busy":
+#             robot[2] -= 1
+#         if robot[2] <= 0:
+#             robot[3] = "free"
+#             robot[2] = robot[1]
+
+
+#83/100
 # from collections import deque
 # from datetime import datetime, timedelta
-
+#
 # data = input().split(";")
 # time = datetime.strptime(input(), "%H:%M:%S")
 # robots = []
 # available_robots = deque()
 # products = deque()
-
+#
 # for element in data:
 #     robot_data = element.split("-")
 #     robot = {}
@@ -67,15 +173,15 @@ while products_queue:
 #     robot["available"] = time
 #     robots.append(robot)
 #     available_robots.append(robot)
-
+#
 # while True:
 #     product = input()
 #     if product == "End":
 #         break
 #     products.append(product)
-
+#
 # time += timedelta(seconds=1)
-
+#
 # while products:
 #     current_product = products.popleft()
 #     if available_robots:
