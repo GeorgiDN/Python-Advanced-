@@ -23,9 +23,9 @@ for _ in range(rows):
 # [print(el) for el in all_elements]
 
 
+
 # rows = int(input())
 # print('\n'.join(map(str, {element for _ in range(rows) for element in input().split()})))
-
 
 
 
