@@ -1,5 +1,3 @@
-
-# 100/100
 def evaluate_numbers(operator, numbers):
     if operator == "*":
         result = 1
@@ -14,18 +12,25 @@ def evaluate_numbers(operator, numbers):
     else:
         result = numbers[0]
         for i in range(1, len(numbers)):
-            result = int(result / numbers[i])
+            result = result // numbers[i]
     numbers.clear()
     numbers.append(result)
 
 
-expression = input().split()
-current_numbers = []
-operators = ("*", "+", "-", "/")
-for item in expression:
-    if item not in operators:
-        current_numbers.append(int(item))
-    else:
-        evaluate_numbers(item, current_numbers)
+def main():
+    expression = input().split()
+    current_numbers = []
+    operators = ["+", "-", "*", "/"]
 
-print(*current_numbers)
+    for char in expression:
+        if char not in operators:
+            current_numbers.append(int(char))
+        else:
+            evaluate_numbers(char, current_numbers)
+
+    print(*current_numbers)
+
+
+if __name__ == "__main__":
+    main()
+
