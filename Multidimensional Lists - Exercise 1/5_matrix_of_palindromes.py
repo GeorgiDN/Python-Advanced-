@@ -14,9 +14,10 @@ for palindrome in matrix_of_palindromes:
 
 
 
+
 # rows, columns = [int(x) for x in input().split()]
 # matrix = []
-
+#
 # for row in range(rows):
 #     current_row = []
 #     for col in range(columns):
@@ -26,5 +27,21 @@ for palindrome in matrix_of_palindromes:
 #         palindrome = first_letter + second_letter + third_letter
 #         current_row.append(palindrome)
 #     matrix.append(current_row)
-
+#
 # [print(" ".join(el)) for el in matrix]
+
+
+
+# DO NOT DO THIS!!!!
+
+# rows, cols = [int(x) for x in input().split()]
+# [print(' '.join(palindrome)) for palindrome in [
+#     [chr(97 + row) + chr(97 + row + col) + chr(97 + row) for col in range(cols) if chr(97 + row) + chr(97 + row + col) + chr(97 + row) == chr(97 + row) + chr(97 + row + col) + chr(97 + row)[::-1]]
+#     for row in range(rows)
+# ]]
+
+
+
+
+# rows, cols = [int(x) for x in input().split()]
+# [print(' '.join(palindrome)) for palindrome in [[chr(97 + row) + chr(97 + row + col) + chr(97 + row) for col in range(cols) if chr(97 + row) + chr(97 + row + col) + chr(97 + row) == chr(97 + row) + chr(97 + row + col) + chr(97 + row)[::-1]] for row in range(rows)]]
