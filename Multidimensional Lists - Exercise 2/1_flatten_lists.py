@@ -1,17 +1,30 @@
-input_text = input().split("|")
-joined_lists = []
+from collections import deque
 
-for sublist in input_text:
+numbers = [x for x in input().split("|")]
+flatten_list = deque()
+
+for sublist in numbers:
     elements = sublist.split()
     cleaned_elements = [x.strip() for x in elements]
-    joined_lists.append(cleaned_elements)
+    flatten_list.appendleft(cleaned_elements)
 
-flattened_list = []
+print(*[item for row in flatten_list for item in row])
 
-while joined_lists:
-    current_list = joined_lists.pop()
-    flattened_list.extend(current_list)
-print(*flattened_list)
+
+# input_text = input().split("|")
+# joined_lists = []
+
+# for sublist in input_text:
+#     elements = sublist.split()
+#     cleaned_elements = [x.strip() for x in elements]
+#     joined_lists.append(cleaned_elements)
+
+# flattened_list = []
+
+# while joined_lists:
+#     current_list = joined_lists.pop()
+#     flattened_list.extend(current_list)
+# print(*flattened_list)
 
 
 
