@@ -1,92 +1,49 @@
+def is_valid_index(idx, number):
+    return 0 <= idx < number
+
+
+def check_possible_attacks(mtrx, r, col, num_of_rows):
+    result = 0
+    if is_valid_index(r - 1, num_of_rows) and is_valid_index(col - 2, num_of_rows) and mtrx[r - 1][col - 2] == "K":
+        result += 1
+    if is_valid_index(r - 2, num_of_rows) and is_valid_index(col - 1, num_of_rows) and mtrx[r - 2][col - 1] == "K":
+        result += 1
+    if is_valid_index(r - 2, num_of_rows) and is_valid_index(col + 1, num_of_rows) and mtrx[r - 2][col + 1] == "K":
+        result += 1
+    if is_valid_index(r - 1, num_of_rows) and is_valid_index(col + 2, num_of_rows) and mtrx[r - 1][col + 2] == "K":
+        result += 1
+    if is_valid_index(r + 1, num_of_rows) and is_valid_index(col + 2, num_of_rows) and mtrx[r + 1][col + 2] == "K":
+        result += 1
+    if is_valid_index(r + 2, num_of_rows) and is_valid_index(col + 1, num_of_rows) and mtrx[r + 2][col + 1] == "K":
+        result += 1
+    if is_valid_index(r + 2, num_of_rows) and is_valid_index(col - 1, num_of_rows) and mtrx[r + 2][col - 1] == "K":
+        result += 1
+    if is_valid_index(r + 1, num_of_rows) and is_valid_index(col - 2, num_of_rows) and mtrx[r + 1][col - 2] == "K":
+        result += 1
+
+    return result
+
+
 size = int(input())
-matrix = []
+matrix = [list(input()) for _ in range(size)]
 
-for _ in range(size):
-    matrix.append(list(input()))
-
-removed_knights = 0
-attacking_knight = []
+removed_knights_number = 0
+knight_row, knight_column = 0, 0
 
 while True:
-    max_attacks = 0
+    max_possible_attack = 0
     for row in range(size):
-        for col in range(size):
-            if matrix[row][col] == "K":
-                atack = 0
-                if (row - 1) in range(size) and (col - 2) in range(size) and matrix[row - 1][col - 2] == "K":
-                    atack += 1
-                if (row - 2) in range(size) and (col - 1) in range(size) and matrix[row - 2][col - 1] == "K":
-                    atack += 1
-                if (row - 2) in range(size) and (col + 1) in range(size) and matrix[row - 2][col + 1] == "K":
-                    atack += 1
-                if (row - 1) in range(size) and (col + 2) in range(size) and matrix[row - 1][col + 2] == "K":
-                    atack += 1
-                if (row + 1) in range(size) and (col + 2) in range(size) and matrix[row + 1][col + 2] == "K":
-                    atack += 1
-                if (row + 2) in range(size) and (col + 1) in range(size) and matrix[row + 2][col + 1] == "K":
-                    atack += 1
-                if (row + 2) in range(size) and (col - 1) in range(size) and matrix[row + 2][col - 1] == "K":
-                    atack += 1
-                if (row + 1) in range(size) and (col - 2) in range(size) and matrix[row + 1][col - 2] == "K":
-                    atack += 1
+        for column in range(size):
+            if matrix[row][column] == "K":
+                attack = check_possible_attacks(matrix, row, column, size)
+                if attack > max_possible_attack:
+                    max_possible_attack = attack
+                    knight_row, knight_column = row, column
 
-                if atack > max_attacks:
-                    max_attacks = atack
-                    attacking_knight = [row, col]
-    if max_attacks == 0:
+    if max_possible_attack == 0:
         break
-    knight_row, knight_col = attacking_knight
-    matrix[knight_row][knight_col] = "0"
-    removed_knights += 1
 
-print(removed_knights)
+    matrix[knight_row][knight_column] = "0"
+    removed_knights_number += 1
 
-
-
-# #  With function
-# def possible_attacks(r, c):
-#     result = 0
-#     if (r - 1) in range(size) and (c - 2) in range(size) and matrix[r - 1][c - 2] == "K":
-#         result += 1
-#     if (r - 2) in range(size) and (c - 1) in range(size) and matrix[r - 2][c - 1] == "K":
-#         result += 1
-#     if (r - 2) in range(size) and (c + 1) in range(size) and matrix[r - 2][c + 1] == "K":
-#         result += 1
-#     if (r - 1) in range(size) and (c + 2) in range(size) and matrix[r - 1][c + 2] == "K":
-#         result += 1
-#     if (r + 1) in range(size) and (c + 2) in range(size) and matrix[r + 1][c + 2] == "K":
-#         result += 1
-#     if (r + 2) in range(size) and (c + 1) in range(size) and matrix[r + 2][c + 1] == "K":
-#         result += 1
-#     if (r + 2) in range(size) and (c - 1) in range(size) and matrix[r + 2][c - 1] == "K":
-#         result += 1
-#     if (r + 1) in range(size) and (c - 2) in range(size) and matrix[r + 1][c - 2] == "K":
-#         result += 1
-#     return result
-
-
-# size = int(input())
-# matrix = []
-
-# for _ in range(size):
-#     matrix.append(list(input()))
-
-# removed_knights = 0
-# attacking_knight = []
-
-# while True:
-#     max_attacks = 0
-#     for row in range(size):
-#         for col in range(size):
-#             if matrix[row][col] == "K":
-#                 attacks = possible_attacks(row, col)
-#                 if attacks > max_attacks:
-#                     max_attacks = attacks
-#                     attacking_knight = [row, col]
-#     if max_attacks == 0:
-#         break
-#     knight_row, knight_col = attacking_knight
-#     matrix[knight_row][knight_col] = "0"
-#     removed_knights += 1
-
-# print(removed_knights)
+print(removed_knights_number)
