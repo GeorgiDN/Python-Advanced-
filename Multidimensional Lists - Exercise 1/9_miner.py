@@ -1,58 +1,70 @@
-size = int(input())
-commands = input().split()
-matrix = []
-coal = 0
-miner_row, miner_col = 0, 0
-game_over_condition = False
-new_row = 0
-new_col = 0
+def fill_the_field_and_find_coals_and_miner(size, field, miner_row, miner_col, coals_number):
+    for r in range(size):
+        row = input().split()
+        field.append(row)
+        if "s" in row:
+            miner_row = r
+            miner_col = row.index('s')
+        if "c" in row:
+            coals_number += row.count("c")
+
+    return field, miner_row, miner_col, coals_number
 
 
-for row in range(size):
-    current_row = [x for x in input().split()]
-    matrix.append(current_row)
-    for col in range(size):
-        if current_row[col] == "s":
-            miner_row, miner_col = row, col
-        elif current_row[col] == "c":
-            coal += 1
+def is_valid_index(value, max_value):
+    return 0 <= value < max_value
 
-for command in commands:
-    if command == "up":
-        if miner_row - 1 in range(size):
-            new_row, new_col = miner_row - 1, miner_col
-        else:
+
+def next_move(current_direction, current_row, current_col, size_):
+    if current_direction == "up" and is_valid_index(current_row - 1, size_):
+        return current_row - 1, current_col
+    if current_direction == "down" and is_valid_index(current_row + 1, size_):
+        return current_row + 1, current_col
+    if current_direction == "left" and is_valid_index(current_col - 1, size_):
+        return current_row, current_col - 1
+    if current_direction == "right" and is_valid_index(current_col + 1, size_):
+        return current_row, current_col + 1
+    return None, None
+
+
+def main():
+    size = int(input())
+    directions = input().split()
+    field = []
+    miner_row, miner_col = None, None
+    coals_number = 0
+    game_over = False
+    field, miner_row, miner_col, coals_number = fill_the_field_and_find_coals_and_miner(size, field, miner_row, miner_col, coals_number)
+
+    for direction in directions:
+        next_row, next_col = next_move(direction, miner_row, miner_col, size)
+        if next_row is None or next_col is None:
             continue
-    elif command == "down":
-        if miner_row + 1 in range(size):
-            new_row, new_col = miner_row + 1, miner_col
-        else:
-            continue
-    elif command == "left":
-        if miner_col - 1 in range(size):
-            new_row, new_col = miner_row, miner_col - 1
-        else:
-            continue
-    elif command == "right":
-        if miner_col + 1 in range(size):
-            new_row, new_col = miner_row, miner_col + 1
-        else:
-            continue
-    symbol_to_overcome = matrix[new_row][new_col]
-    if symbol_to_overcome == "c":
-        coal -= 1
-    elif symbol_to_overcome == "e":
-        print(f"Game over! ({new_row}, {new_col})")
-        game_over_condition = True
-        break
-    matrix[new_row][new_col] = "s"
-    matrix[miner_row][miner_col] = "*"
-    miner_row, miner_col = new_row, new_col
-    if coal == 0:
-        print(f"You collected all coal! ({new_row}, {new_col})")
-        game_over_condition = True
-        break
 
-if not game_over_condition:
-    print(f"{coal} pieces of coal left. ({miner_row}, {miner_col})")
+        if field[next_row][next_col] == "c":
+            coals_number -= 1
+            field[miner_row][miner_col] = "*"
+            if coals_number == 0:
+                miner_row, miner_col = next_row, next_col
+                print(f"You collected all coal! ({miner_row}, {miner_col})")
+                field[miner_row][miner_col] = "s"
+                break
 
+        elif field[next_row][next_col] == "e":
+            field[miner_row][miner_col] = "*"
+            miner_row, miner_col = next_row, next_col
+            print(f"Game over! ({miner_row}, {miner_col})")
+            game_over = True
+            field[miner_row][miner_col] = "s"
+            break
+
+        field[miner_row][miner_col] = "*"
+        miner_row, miner_col = next_row, next_col
+        field[miner_row][miner_col] = "s"
+
+    if coals_number > 0 and not game_over:
+        print(f"{coals_number} pieces of coal left. ({miner_row}, {miner_col})")
+
+
+if __name__ == '__main__':
+    main()
