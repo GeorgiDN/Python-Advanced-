@@ -40,7 +40,6 @@ def main():
     size = int(input())
     jet_row, jet_col = None, None
     field, jet_row, jet_col = fill_the_field_and_find_jet_position(size, jet_row, jet_col)
-    start_row, start_col = jet_row, jet_col
     jet_armour = 300
 
     line = ' '
