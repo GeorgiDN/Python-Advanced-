@@ -47,11 +47,6 @@ def main():
 
         if field[next_row][next_col] == "R":
             alice_left_wonderland = True
-            field[alice_row][alice_col] = "*"
-            alice_row, alice_col = next_row, next_col
-            field[alice_row][alice_col] = "A"  # to check where is alice
-            field[alice_row][alice_col] = "*"
-            break
 
         if field[next_row][next_col].isdigit():
             bags_of_tea = int(field[next_row][next_col])
@@ -74,4 +69,5 @@ def main():
     #     print(' '.join(curr_row))
 
 
-main()
+if __name__ == '__main__':
+    main()
