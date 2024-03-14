@@ -1,14 +1,16 @@
 def grocery_store(**kwargs):
-    result = {}
+    products = dict(sorted(kwargs.items(), key=lambda x: (-x[1], -len(x[0]), x[0])))
 
-    for key, value in kwargs.items():
-        result[key] = value
+    result = "\n".join([f"{product}: {qty}" for product, qty in products.items()])
+    return result
 
-    receipt = dict(sorted(result.items(), key=lambda x: (-x[1], -len(x[0]), x[0])))
 
-    result_str = "\n".join([f"{k}: {v}" for k, v in receipt.items()])
+print(grocery_store(
+    bread=5,
+    pasta=12,
+    eggs=12,
+))
 
-    return result_str
 
 print(grocery_store(
     bread=2,
