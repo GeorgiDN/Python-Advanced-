@@ -1,11 +1,31 @@
-class ValueCannotBeNegative(Exception):
+class Error(Exception):
+    """Base class for other exceptions"""
     pass
 
-for _ in range(5):
-    number = int(input())
 
-    if number < 0:
+class ValueCannotBeNegative(Error):
+    """Raised when the input value is too small"""
+
+
+for _ in range(5):
+    num = int(input())
+    if num < 0:
         raise ValueCannotBeNegative
+
+
+
+
+# class ValueCannotBeNegative(Exception):
+#     pass
+
+# for _ in range(5):
+#     number = int(input())
+
+#     if number < 0:
+#         raise ValueCannotBeNegative
+
+
+
 
 
 ######################################################################################  CONDITION  ##########################################################################################################################################
