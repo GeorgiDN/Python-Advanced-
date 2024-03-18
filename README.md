@@ -39,7 +39,7 @@ Online judge system - https://judge.softuni.org/
 
 ➡[Workshop-Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Workshop-Exercise)
 
-➡[Modules-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules)
+➡[Modules-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules%20Lab)
 
 ➡[Modules-Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules-Exercise)
 
