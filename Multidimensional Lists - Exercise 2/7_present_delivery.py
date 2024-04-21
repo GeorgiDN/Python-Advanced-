@@ -187,5 +187,5 @@ if __name__ == '__main__':
 #         print(f"No presents for {nice_kids_left} nice kid/s.")
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
