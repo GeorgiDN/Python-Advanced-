@@ -1,67 +1,86 @@
-presents = int(input())
-size = int(input())
-neighbourhood = []
-santa_row, santa_col = 0, 0
-nice_kids = 0
-count_nice_kids = 0
+def is_valid_index(matrix, idx):
+    return 0 <= idx < len(matrix)
 
-for row in range(size):
-    current_row = input().split()
-    neighbourhood.append(current_row)
-    for symbol in current_row:
-        if symbol == "S":
-            santa_row, santa_col = row, current_row.index(symbol)
-        elif symbol == "V":
-            nice_kids += 1
 
-new_row, new_col = 0, 0
+def next_move(matrix, curr_row, curr_col, line):
+    if line == "up" and is_valid_index(matrix, curr_row - 1):
+        return curr_row - 1, curr_col
+    elif line == "down" and is_valid_index(matrix, curr_row + 1):
+        return curr_row + 1, curr_col
+    elif line == "right" and is_valid_index(matrix, curr_col + 1):
+        return curr_row, curr_col + 1
+    elif line == "left" and is_valid_index(matrix, curr_col - 1):
+        return curr_row, curr_col - 1
+    return None, None
 
-while True:
-    command = input()
-    if command == "Christmas morning" or presents == 0:
-        break
-    if command == "up":
-        new_row, new_col = santa_row - 1, santa_col
-    elif command == "down":
-        new_row, new_col = santa_row + 1, santa_col
-    elif command == "left":
-        new_row, new_col = santa_row, santa_col - 1
-    elif command == "right":
-        new_row, new_col = santa_row, santa_col + 1
-    if new_row in range(size) and new_col in range(size):
-        house = neighbourhood[new_row][new_col]
-        if house == "V":
-            nice_kids -= 1
-            presents -= 1
-            count_nice_kids += 1
-        elif house == "C":
-            surrounding_houses = [
-                [new_row - 1, new_col],
-                [new_row + 1, new_col],
-                [new_row, new_col - 1],
-                [new_row, new_col + 1]
-            ]
-            for h in surrounding_houses:
-                if presents == 0:
-                    break
-                h_row, h_col = h
-                if neighbourhood[h_row][h_col] == "X":
-                    presents -= 1
-                elif neighbourhood[h_row][h_col] == "V":
-                    presents -= 1
-                    nice_kids -= 1
-                    count_nice_kids += 1
-                neighbourhood[h_row][h_col] = "-"
-        neighbourhood[new_row][new_col] = "S"
-        neighbourhood[santa_row][santa_col] = "-"
-        santa_row, santa_col = new_row, new_col
+
+def fill_the_matrix_and_take_positions(n, s_row, s_col):
+    matrix = []
+    nice_kids = 0
+    for r in range(n):
+        row = input().split()
+        matrix.append(row)
+        if "S" in row:
+            s_row = r
+            s_col = row.index("S")
+        if "V" in row:
+            nice_kids += row.count("V")
+    return matrix, s_row, s_col, nice_kids
+
+
+def main():
+    presents = int(input())
+    size = int(input())
+    santa_row, santa_col = 0, 0
+    neighbourhood, santa_row, santa_col, nice_kids_count = (
+        fill_the_matrix_and_take_positions(size, santa_row, santa_col))
+    nice_kids_left = nice_kids_count
+
+    while True:
         if presents == 0:
             break
+        command = input()
+        if command == "Christmas morning":
+            break
 
-if nice_kids > 0 and presents == 0:
-    print("Santa ran out of presents!")
-[print(" ".join(element)) for element in neighbourhood]
-if nice_kids == 0:
-    print(f"Good job, Santa! {count_nice_kids} happy nice kid/s.")
-else:
-    print(f"No presents for {nice_kids} nice kid/s.")
+        direction = command
+        next_row, next_col = next_move(neighbourhood, santa_row, santa_col, direction)
+
+        if next_row is not None and next_col is not None:
+            if neighbourhood[next_row][next_col] == "V":
+                presents -= 1
+                nice_kids_left -= 1
+
+            elif neighbourhood[next_row][next_col] == "C":
+                surrounding_houses = [
+                    [next_row - 1, next_col],
+                    [next_row + 1, next_col],
+                    [next_row, next_col - 1],
+                    [next_row, next_col + 1]
+                ]
+                for house in surrounding_houses:
+                    if presents == 0:
+                        break
+                    h_row, h_col = house
+                    if neighbourhood[h_row][h_col] == "X":
+                        presents -= 1
+                    elif neighbourhood[h_row][h_col] == "V":
+                        presents -= 1
+                        nice_kids_left -= 1
+                    neighbourhood[h_row][h_col] = "-"
+
+            neighbourhood[santa_row][santa_col] = "-"
+            santa_row, santa_col = next_row, next_col
+            neighbourhood[santa_row][santa_col] = "S"  # check where is Santa
+
+    if nice_kids_left > 0 and presents == 0:
+        print("Santa ran out of presents!")
+    [print(" ".join(element)) for element in neighbourhood]
+    if nice_kids_left == 0:
+        print(f"Good job, Santa! {nice_kids_count} happy nice kid/s.")
+    else:
+        print(f"No presents for {nice_kids_left} nice kid/s.")
+
+
+if __name__ == '__main__':
+    main()
