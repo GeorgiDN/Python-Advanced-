@@ -84,13 +84,14 @@ else:
 
 #     if choc <= 0 or milk <= 0:
 #         process_chocolate_and_milk(choc, milk, chocs, milks)
-#         continue
-
-#     shakes = make_milkshake(choc, milk, chocs, milks, shakes)
+#     else:
+#         shakes = make_milkshake(choc, milk, chocs, milks, shakes)
 
 # print("Great! You made all the chocolate milkshakes needed!") if shakes == 5 else print("Not enough milkshakes.")
 # print(f"Chocolate: {', '.join([str(x) for x in chocs])}") if chocs else print("Chocolate: empty")
 # print(f"Milk: {', '.join([str(x) for x in milks])}") if milks else print("Milk: empty")
+
+
 
 
     
