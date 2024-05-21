@@ -15,15 +15,16 @@ def is_valid_index(value, max_value):
     return 0 <= value < max_value
 
 
-def next_move(current_direction, current_row, current_col, size_):
-    if current_direction == "up" and is_valid_index(current_row - 1, size_):
-        return current_row - 1, current_col
-    if current_direction == "down" and is_valid_index(current_row + 1, size_):
-        return current_row + 1, current_col
-    if current_direction == "left" and is_valid_index(current_col - 1, size_):
-        return current_row, current_col - 1
-    if current_direction == "right" and is_valid_index(current_col + 1, size_):
-        return current_row, current_col + 1
+def next_move(current_direction, curr_row, curr_col, size_):
+    all_directions = {"up": [curr_row - 1, curr_col],
+                      "down": [curr_row + 1, curr_col],
+                      "right": [curr_row, curr_col + 1],
+                      "left": [curr_row, curr_col - 1]}
+
+    new_row, new_col = all_directions[current_direction][0], all_directions[current_direction][1]
+    if is_valid_index(new_row, size_) \
+            and is_valid_index(new_col, size_):
+        return new_row, new_col
     return None, None
 
 
