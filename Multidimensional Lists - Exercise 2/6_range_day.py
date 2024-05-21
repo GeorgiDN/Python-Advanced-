@@ -95,6 +95,7 @@ if __name__ == '__main__':
 
 
 
+
 # def fill_the_matrix_and_find_shooter_and_targets(s_row, s_col, mtrx_size):
 #     num_targets = 0
 #     matrix = []
