@@ -54,13 +54,13 @@ def bunny_spread(matrix, num_of_rows, cols, player_dead):
     return matrix, player_dead
 
 
-def out_of_boundaries(won, dead, pl_row, pl_col, matrix):
-    if not dead:
+def out_of_boundaries(won, player_dead, pl_row, pl_col, matrix):
+    if not player_dead:
         won = True
         matrix[pl_row][pl_col] = "."
     return matrix, won
-
-
+    
+    
 def main():
     rows, columns = [int(x) for x in input().split()]
     field = []
@@ -75,7 +75,7 @@ def main():
         next_row, next_col = next_move(direction, player_row, player_col, rows, columns)
         if next_row is None or next_col is None:
             field, player_won = out_of_boundaries(player_won, player_is_dead, player_row, player_col, field)
-
+            
         else:
             if field[next_row][next_col] == "B":
                 player_is_dead = True
@@ -95,6 +95,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
