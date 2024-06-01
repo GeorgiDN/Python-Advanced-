@@ -1,3 +1,3 @@
 # SoftUni Judge
 
-https://judge.softuni.org/Contests/Practice/DownloadResource/11135
+[03. Magic Triangle](https://judge.softuni.org/Contests/Practice/DownloadResource/11135)
