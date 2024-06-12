@@ -13,13 +13,13 @@ def cookbook(*args):
             ingredients_book[cuisine][recipe_name] = ingredients
 
     result = ''
-    sorted1_ingredients_book = dict(sorted(ingredients_book.items(), key=lambda x: (-len(x[1]), (x[0]))))
+    sorted_ingredients_book = dict(sorted(ingredients_book.items(), key=lambda x: (-len(x[1]), (x[0]))))
 
-    for kitchen, data in sorted1_ingredients_book.items():
-        data = dict(sorted(data.items()))
-        result += f"{kitchen} cuisine contains {len(data)} recipes:\n"
-        for recipie, current_ingredients in data.items():
-            result += f"  * {recipie} -> Ingredients: {', '.join(current_ingredients)}\n"
+    for cuisine, recipies in sorted_ingredients_book.items():
+        recipies = dict(sorted(recipies.items()))
+        result += f"{cuisine} cuisine contains {len(recipies)} recipes:\n"
+        for recipie, ingredients in recipies.items():
+            result += f"  * {recipie} -> Ingredients: {', '.join(ingredients)}\n"
 
     return result
 
@@ -50,3 +50,4 @@ def cookbook(*args):
 #     ("Miso Soup", "Japanese", ["tofu", "seaweed", "green onions"]),
 #     ("Guacamole", "Mexican", ["avocado", "tomato", "onion", "lime"])
 #     ))
+
