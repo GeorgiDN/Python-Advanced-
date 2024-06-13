@@ -1,31 +1,30 @@
+# https://judge.softuni.org/Contests/Practice/Index/4193#0
 from collections import deque
-initial_fuel = list(map(int, input().split(' ')))
-consumption = deque(map(int, input().split(" ")))
+fuels = list(map(int, input().split(' ')))
+consumptions = deque(map(int, input().split(" ")))
 fuel_needed = deque(map(int, input().split(" ")))
 fail = False
 
 altitude = 0
-lst_altitudes = []
+altitudes_list = []
 
-while initial_fuel and consumption:
-    curr_fuel = initial_fuel.pop()
-    curr_consumption = consumption.popleft()
+while fuels and consumptions:
+    fuel = fuels.pop()
+    consumption = consumptions.popleft()
     fuel_altitude = fuel_needed.popleft()
-    result = curr_fuel - curr_consumption
+    result = fuel - consumption
 
     if result < fuel_altitude:
         print(f"John did not reach: Altitude {altitude + 1}")
         fail = True
         break
     altitude += 1
-    lst_altitudes.append(f"Altitude {altitude}")
+    altitudes_list.append(f"Altitude {altitude}")
     print(f"John has reached: Altitude {altitude}")
 
 if fail:
     print("John failed to reach the top.")
-    if lst_altitudes:
-        print("Reached altitudes: " + ', '.join(lst_altitudes))
-    else:
-        print("John didn't reach any altitude.")
-elif not fail:
+    print("Reached altitudes: " + ', '.join(altitudes_list)) if altitudes_list \
+        else print("John didn't reach any altitude.")
+else:
     print("John has reached all the altitudes and managed to reach the top!")
