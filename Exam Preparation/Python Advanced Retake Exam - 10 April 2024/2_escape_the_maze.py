@@ -1,27 +1,30 @@
-def is_valid_index(n_size, idx):
-    return 0 <= idx < n_size
+def is_valid_index(idx, size):
+    return 0 <= idx < size
 
 
-def next_move(n_size, curr_row, curr_col, line):
-    all_directions = {"up": [curr_row - 1, curr_col],
-                      "down": [curr_row + 1, curr_col],
-                      "right": [curr_row, curr_col + 1],
-                      "left": [curr_row, curr_col - 1]}
+def next_move(rows, row, col, direction):
+    moves = {
+        "up": (-1, 0),
+        "down": (1, 0),
+        "left": (0, -1),
+        "right": (0, 1)
+    }
 
-    new_row, new_col = all_directions[line][0], all_directions[line][1]
-    if is_valid_index(n_size, new_row) \
-            and is_valid_index(n_size, new_col):
-        return new_row, new_col
+    d_row, d_col = moves[direction]
+    row = (row + d_row)
+    col = (col + d_col)
+    if is_valid_index(row, rows) and is_valid_index(col, rows):
+        return row, col
     return None, None
 
 
-def fill_the_matrix_and_take_positions(n, t_row, t_col):
+def fill_the_matrix_and_take_positions(rows, t_row, t_col):
     matrix = []
-    for r in range(n):
+    for idx in range(rows):
         row = list(input())
         matrix.append(row)
         if "P" in row:
-            t_row = r
+            t_row = idx
             t_col = row.index("P")
     return matrix, t_row, t_col
 
@@ -35,21 +38,21 @@ def print_result(matrix, traveler_dead, left_maze, t_health):
 
 
 def main():
-    size = int(input())
+    rows = int(input())
     MAX_HEALTH = 100
     traveler_health = MAX_HEALTH
     traveler_is_dead = False
     traveler_left_maze = False
     traveler_row, traveler_col = 0, 0
     maze, traveler_row, traveler_col, = (
-        fill_the_matrix_and_take_positions(size, traveler_row, traveler_col))
+        fill_the_matrix_and_take_positions(rows, traveler_row, traveler_col))
 
     while True:
         if traveler_is_dead or traveler_left_maze:
             break
 
         command = input()
-        next_row, next_col = next_move(size, traveler_row, traveler_col, command)
+        next_row, next_col = next_move(rows, traveler_row, traveler_col, command)
         if next_row is None or next_col is None:
             continue
 
@@ -67,10 +70,11 @@ def main():
 
         maze[traveler_row][traveler_col] = "-"
         traveler_row, traveler_col = next_row, next_col
-        maze[traveler_row][traveler_col] = "P"  #  where is Traveler
+        maze[traveler_row][traveler_col] = "P"
 
     print_result(maze, traveler_is_dead, traveler_left_maze, traveler_health)
 
 
 if __name__ == '__main__':
     main()
+    
