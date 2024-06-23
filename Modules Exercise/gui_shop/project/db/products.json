@@ -1,0 +1,14 @@
+{
+  "Equipment 1": {
+    "quantity": 10,
+    "image": "images/picture1.jpg"
+  },
+  "Equipment 6": {
+    "quantity": 3,
+    "image": "images/picture2.jpg"
+  },
+  "Equipment 3": {
+    "quantity": 3,
+    "image": "images/picture3.jpg"
+  }
+}
