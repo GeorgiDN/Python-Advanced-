@@ -78,18 +78,18 @@ if __name__ == '__main__':
 # 2. move king
 # def is_valid_index(idx, size):
 #     return 0 <= idx < size
-#
-#
+# 
+# 
 # def next_move(row, col, direction, directions):
 #     d_row, d_col = directions[direction][0], directions[direction][1]
 #     return row + d_row, col + d_col
-#
-#
+# 
+# 
 # def main():
 #     size = 8
-#     matrix, queens_capture_kings = [], []
+#     matrix, queens_capture_king = [], []
 #     king_row, king_col = 0, 0
-#
+# 
 #     directions = {
 #         "up": (0, -1),
 #         "down": (0, 1),
@@ -99,28 +99,28 @@ if __name__ == '__main__':
 #         "bottom left diagonal": (-1, 1),
 #         "top right diagonal": (1, -1),
 #         "bottom right diagonal": (1, 1)}
-#
+# 
 #     for row in range(size):
 #         matrix.append(input().split())
 #         if "K" in matrix[row]:
 #             king_row = row
 #             king_col = matrix[row].index("K")
-#
+# 
 #     for direction in directions:
 #         next_row, next_col = king_row, king_col
 #         for move in range(size):
 #             next_row, next_col = next_move(next_row, next_col, direction, directions)
 #             if is_valid_index(next_row, size) and is_valid_index(next_col, size):
 #                 if matrix[next_row][next_col] == "Q":
-#                     queens_capture_kings.append([next_row, next_col])
+#                     queens_capture_king.append([next_row, next_col])
 #                     break
 #             else:
 #                 break
-#
-#     [print(row) for row in queens_capture_kings] if queens_capture_kings else print("The king is safe!")
-#
-#
-#
+# 
+#     [print(row) for row in queens_capture_king] if queens_capture_king else print("The king is safe!")
+# 
+# 
+# 
 # if __name__ == '__main__':
 #     main()
 
