@@ -41,7 +41,7 @@ Online judge system - https://judge.softuni.org/
 
 ➡[Modules-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules%20Lab)
 
-➡[Modules-Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules-Exercise)
+➡[Modules Exercise](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Modules%20Exercise)
 
 ➡[Comperhension-Lab](https://github.com/GeorgiDN/Python-Advanced-/tree/main/Comperhensions%20-%20lab)
 
