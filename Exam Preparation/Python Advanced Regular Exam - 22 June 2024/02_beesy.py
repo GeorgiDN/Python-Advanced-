@@ -35,8 +35,8 @@ def check_energy(bee_energy, collected_nectar, nectar_goal, restored_energy, suc
     if bee_energy == 0:
         if collected_nectar >= nectar_goal and not restored_energy:
             successful_restored = True
-            restored_energy = collected_nectar - nectar_goal
-            bee_energy += restored_energy
+            energy_restore = collected_nectar - nectar_goal
+            bee_energy += energy_restore
             collected_nectar = nectar_goal
             restored_energy = True
 
