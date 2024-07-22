@@ -51,12 +51,12 @@ def main():
             nectar_sum = int(field[next_row][next_col])
             collected_nectar += nectar_sum
 
-        if bee_energy == 0 and collected_nectar < 30:
+        elif bee_energy == 0 and collected_nectar < 30:
             field[b_row][b_col] = "-"
             field[next_row][next_col] = "B"
             break
 
-        if field[next_row][next_col] == hive:
+        elif field[next_row][next_col] == hive:
             hive_reached = True
 
         field[b_row][b_col] = "-"
