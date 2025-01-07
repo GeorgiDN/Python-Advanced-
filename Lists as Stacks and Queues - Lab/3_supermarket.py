@@ -17,6 +17,25 @@ while True:
 print(f"{len(people_on_the_queue)} people remaining.")
 
 
+# from collections import deque
+
+# people_on_the_queue = deque()
+
+# while True:
+#     name = input()
+#     if name == "End":
+#         break
+
+#     elif name == "Paid":
+#         while people_on_the_queue:
+#             print(people_on_the_queue.popleft())
+
+#     else:
+#         people_on_the_queue.append(name)
+
+# print(f"{len(people_on_the_queue)} people remaining.")
+
+
 
 # from _collections import deque
 
