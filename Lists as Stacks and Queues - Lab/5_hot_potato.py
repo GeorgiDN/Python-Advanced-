@@ -1,21 +1,40 @@
 from collections import deque
 
-players = input().split()
-step = int(input())
-players = deque(players)
+people = deque(input().split())
+count = int(input())
+idx = 1
 
-counter = 0
+while len(people) != 1:
 
-while len(players) > 1:
-    counter += 1
-    current_player = players.popleft()
-    if counter == step:
-        print(f"Removed {current_player}")
-        counter = 0
-    else:
-        players.append(current_player)
+    if idx == count:
+        print(f'Removed {people.popleft()}')
+        idx = 1
+        continue
 
-print(f"Last is {players.popleft()}")
+    idx += 1
+    people.append(people.popleft())
+
+print(f'Last is {people.pop()}')
+
+
+# from collections import deque
+
+# players = input().split()
+# step = int(input())
+# players = deque(players)
+
+# counter = 0
+
+# while len(players) > 1:
+#     counter += 1
+#     current_player = players.popleft()
+#     if counter == step:
+#         print(f"Removed {current_player}")
+#         counter = 0
+#     else:
+#         players.append(current_player)
+
+# print(f"Last is {players.popleft()}")
 
 
 
