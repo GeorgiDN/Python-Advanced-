@@ -1,37 +1,71 @@
 from collections import deque
 
-liters_in_dispenser = int(input())
-people_in_the_queue = deque()
 
-start = False
+people_on_queue, water = deque(), int(input())
+
 while True:
     command = input()
-    if command == "End":
+    if command == 'End':
         break
 
-    if command == "Start":
-        start = True
+    elif command == 'Start':
         continue
 
-    if not start:
-        name = command
-        people_in_the_queue.append(name)
+    elif command.isdigit():
+        liters = int(command)
+        person = people_on_queue.popleft()
+        if water >= liters:
+            water -= liters
+            print(f'{person} got water')
+        else:
+            print(f'{person} must wait')
+
+    elif command.startswith('refill'):
+        command = command.split(' ')
+        curr_liters = int(command[1])
+        water += curr_liters
 
     else:
-        if command.startswith("ref"):
-            data = command.split()
-            liters = int(data[1])
-            liters_in_dispenser += liters
+        name = command
+        people_on_queue.append(name)
 
-        else:
-            wanted_water = int(command)
-            if wanted_water <= liters_in_dispenser:
-                print(f"{people_in_the_queue.popleft()} got water")
-                liters_in_dispenser -= wanted_water
-            else:
-                print(f"{people_in_the_queue.popleft()} must wait")
+print(f'{water} liters left')
 
-print(f"{liters_in_dispenser} liters left")
+
+# from collections import deque
+
+# liters_in_dispenser = int(input())
+# people_in_the_queue = deque()
+
+# start = False
+# while True:
+#     command = input()
+#     if command == "End":
+#         break
+
+#     if command == "Start":
+#         start = True
+#         continue
+
+#     if not start:
+#         name = command
+#         people_in_the_queue.append(name)
+
+#     else:
+#         if command.startswith("ref"):
+#             data = command.split()
+#             liters = int(data[1])
+#             liters_in_dispenser += liters
+
+#         else:
+#             wanted_water = int(command)
+#             if wanted_water <= liters_in_dispenser:
+#                 print(f"{people_in_the_queue.popleft()} got water")
+#                 liters_in_dispenser -= wanted_water
+#             else:
+#                 print(f"{people_in_the_queue.popleft()} must wait")
+
+# print(f"{liters_in_dispenser} liters left")
 
 
 
