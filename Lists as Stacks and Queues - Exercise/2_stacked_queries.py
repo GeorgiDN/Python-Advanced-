@@ -1,55 +1,85 @@
-PUSH = "1"
-DELETE = "2"
-PRINT_MAX = "3"
-PRINT_MIN = "4"
+PUSH = '1'
+DELETE = '2'
+MAX = '3'
+MIN = '4'
+
+actions = {
+    PUSH: lambda stack, num: stack.append(num),
+    DELETE: lambda stack: stack.pop() if stack else None,
+    MAX: lambda stack: print(max(stack)) if stack else None,
+    MIN: lambda stack: print(min(stack)) if stack else None,
+}
+
+rows = int(input())
+my_stack = []
+
+for _ in range(rows):
+    data = input().split()
+    action = data[0]
+
+    if action == PUSH:
+        num = int(data[1])
+        actions[action](my_stack, num)
+
+    else:
+        actions[action](my_stack)
+
+print(', '.join(map(str, my_stack[::-1])))
 
 
-def push_the_number(stack_, current_number_):
-    stack_.append(current_number_)
-    return stack_
+
+# PUSH = "1"
+# DELETE = "2"
+# PRINT_MAX = "3"
+# PRINT_MIN = "4"
 
 
-def delete(stack_):
-    if stack_:
-        stack_.pop()
-    return stack_
+# def push_the_number(stack_, current_number_):
+#     stack_.append(current_number_)
+#     return stack_
 
 
-def print_max(stack_):
-    if stack_:
-        return print(max(stack_))
+# def delete(stack_):
+#     if stack_:
+#         stack_.pop()
+#     return stack_
 
 
-def print_min(stack_):
-    if stack_:
-        return print(min(stack_))
+# def print_max(stack_):
+#     if stack_:
+#         return print(max(stack_))
 
 
-def main():
-    stack = []
-    count = int(input())
-    for _ in range(count):
-        data = input().split()
-        if data[0] == PUSH:
-            current_number = int(data[1])
-            stack = push_the_number(stack, current_number)
-
-        elif data[0] == DELETE:
-            stack = delete(stack)
-
-        elif data[0] == PRINT_MAX:
-            print_max(stack)
-
-        elif data[0] == PRINT_MIN:
-            print_min(stack)
-
-    if stack:
-        numbers_in_reversed = stack[::-1]
-        print(", ".join(map(str, numbers_in_reversed)))
+# def print_min(stack_):
+#     if stack_:
+#         return print(min(stack_))
 
 
-if __name__ == '__main__':
-    main()
+# def main():
+#     stack = []
+#     count = int(input())
+#     for _ in range(count):
+#         data = input().split()
+#         if data[0] == PUSH:
+#             current_number = int(data[1])
+#             stack = push_the_number(stack, current_number)
+
+#         elif data[0] == DELETE:
+#             stack = delete(stack)
+
+#         elif data[0] == PRINT_MAX:
+#             print_max(stack)
+
+#         elif data[0] == PRINT_MIN:
+#             print_min(stack)
+
+#     if stack:
+#         numbers_in_reversed = stack[::-1]
+#         print(", ".join(map(str, numbers_in_reversed)))
+
+
+# if __name__ == '__main__':
+#     main()
 
 
 
