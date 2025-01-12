@@ -1,55 +1,76 @@
-def print_result(result_):
-    print(', '.join(map(str, result_)))
+count_names = int(input())
+names = [input() for _ in range(count_names)]
 
+even, odd = set(), set()
 
-def fill_the_sets_with_sum(evens_, odds_, ascii_sum_):
-    if ascii_sum_ % 2 == 0:
-        evens_.add(ascii_sum_)
+for row, name in enumerate(names, start=1):
+    total_sum = sum(ord(ch) for ch in name) // row
+    if total_sum % 2 == 0:
+        even.add(total_sum)
     else:
-        odds_.add(ascii_sum_)
+        odd.add(total_sum)
 
-    return evens_, odds_
-
-
-def fill_the_result(result_, evens_, odds_):
-    for num in evens_:
-        result_.add(num)
-
-    for num in odds_:
-        result_.add(num)
-
-    return result_
+if sum(even) == sum(odd):
+    print(', '.join(map(str, even.union(odd))))
+elif sum(even) < sum(odd):
+    print(', '.join(map(str, odd)))
+else:
+    print(', '.join(map(str, even.symmetric_difference(odd))))
 
 
-def main():
-    names_number = int(input())
 
-    evens = set()
-    odds = set()
-
-    for row in range(1, names_number + 1):
-        name = input()
-        ascii_sum = 0
-
-        for char in name:
-            ascii_sum += ord(char)
-
-        ascii_sum //= row
-
-        evens, odds = fill_the_sets_with_sum(evens, odds, ascii_sum)
-
-    result = set()
-    if sum(evens) >= sum(odds):
-        result = fill_the_result(result, evens, odds)
-
-    elif sum(evens) < sum(odds):
-        result = odds
-
-    print_result(result)
+# def print_result(result_):
+#     print(', '.join(map(str, result_)))
 
 
-if __name__ == "__main__":
-    main()
+# def fill_the_sets_with_sum(evens_, odds_, ascii_sum_):
+#     if ascii_sum_ % 2 == 0:
+#         evens_.add(ascii_sum_)
+#     else:
+#         odds_.add(ascii_sum_)
+
+#     return evens_, odds_
+
+
+# def fill_the_result(result_, evens_, odds_):
+#     for num in evens_:
+#         result_.add(num)
+
+#     for num in odds_:
+#         result_.add(num)
+
+#     return result_
+
+
+# def main():
+#     names_number = int(input())
+
+#     evens = set()
+#     odds = set()
+
+#     for row in range(1, names_number + 1):
+#         name = input()
+#         ascii_sum = 0
+
+#         for char in name:
+#             ascii_sum += ord(char)
+
+#         ascii_sum //= row
+
+#         evens, odds = fill_the_sets_with_sum(evens, odds, ascii_sum)
+
+#     result = set()
+#     if sum(evens) >= sum(odds):
+#         result = fill_the_result(result, evens, odds)
+
+#     elif sum(evens) < sum(odds):
+#         result = odds
+
+#     print_result(result)
+
+
+# if __name__ == "__main__":
+#     main()
 
 
 
