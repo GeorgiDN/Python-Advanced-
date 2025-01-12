@@ -1,18 +1,28 @@
-first_set_length, second_set_length = input().split()
+n, m = list(map(int, input().split()))
+set1 = {int(input()) for _ in range(n)}
+set2 = {int(input()) for _ in range(m)}
+print(*set1.intersection(set2), sep='\n')
 
-first_set = set()
-second_set = set()
+# n, m = list(map(int, input().split()))
+# print(*{int(input()) for _ in range(n)}.intersection({int(input()) for _ in range(m)}), sep='\n')
 
-for _ in range(int(first_set_length)):
-    number = int(input())
-    first_set.add(number)
+
+
+# first_set_length, second_set_length = input().split()
+
+# first_set = set()
+# second_set = set()
+
+# for _ in range(int(first_set_length)):
+#     number = int(input())
+#     first_set.add(number)
     
-for _ in range(int(second_set_length)):
-    number = int(input())
-    second_set.add(number)
+# for _ in range(int(second_set_length)):
+#     number = int(input())
+#     second_set.add(number)
     
-numbers_in_two_sets = second_set.intersection(first_set)
-[print(num) for num in numbers_in_two_sets]
+# numbers_in_two_sets = second_set.intersection(first_set)
+# [print(num) for num in numbers_in_two_sets]
 
 
 
