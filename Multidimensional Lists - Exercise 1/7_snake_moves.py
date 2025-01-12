@@ -1,19 +1,34 @@
-rows, cols = [int(x) for x in input().split()]
-text = input()
+from collections import deque
 
-result = []
-index = 0
+rows, cols = list(map(int, input().split()))
+text = deque(input())
 
-for row in range(rows):
+for row in range(1, rows + 1):
     curr_string = ''
     for col in range(cols):
-        curr_string += text[index % len(text)]
-        index += 1
-    if row > 0 and row % 2 != 0:
-        curr_string = curr_string[::-1]
-    result.append(curr_string)
+        char = text.popleft()
+        curr_string += char
+        text.append(char)
+    print(curr_string[::-1]) if row % 2 == 0 else print(curr_string)
 
-print('\n'.join(result))
+
+
+# rows, cols = [int(x) for x in input().split()]
+# text = input()
+
+# result = []
+# index = 0
+
+# for row in range(rows):
+#     curr_string = ''
+#     for col in range(cols):
+#         curr_string += text[index % len(text)]
+#         index += 1
+#     if row > 0 and row % 2 != 0:
+#         curr_string = curr_string[::-1]
+#     result.append(curr_string)
+
+# print('\n'.join(result))
 
 
 
