@@ -1,16 +1,28 @@
-rows, cols = [int(x) for x in input().split()]
-matrix = [[x for x in input().split()] for _ in range(rows)]
-max_square_sum = 0
-square_matrix = []
+rows, cols = list(map(int, input().split()))
+matrix = [input().split() for _ in range(rows)]
+count = 0
 
-for row in range(rows - 1):
-    for col in range(cols - 1):
-        if matrix[row][col] == matrix[row][col+1] and matrix[row+1][col] == matrix[row+1][col+1] \
-                and matrix[row][col] == matrix[row+1][col+1]:
-            current_square = [matrix[row][col], matrix[row][col+1], matrix[row+1][col], matrix[row+1][col+1]]
-            square_matrix.append(current_square)
+for r in range(rows - 1):
+    for c in range(cols - 1):
+        char = matrix[r][c]
+        if matrix[r + 1][c] == char and matrix[r][c + 1] == char and matrix[r + 1][c + 1] == char:
+            count += 1
+print(count)
 
-print(len(square_matrix))
+
+# rows, cols = [int(x) for x in input().split()]
+# matrix = [[x for x in input().split()] for _ in range(rows)]
+# max_square_sum = 0
+# square_matrix = []
+
+# for row in range(rows - 1):
+#     for col in range(cols - 1):
+#         if matrix[row][col] == matrix[row][col+1] and matrix[row+1][col] == matrix[row+1][col+1] \
+#                 and matrix[row][col] == matrix[row+1][col+1]:
+#             current_square = [matrix[row][col], matrix[row][col+1], matrix[row+1][col], matrix[row+1][col+1]]
+#             square_matrix.append(current_square)
+
+# print(len(square_matrix))
 
 
 
