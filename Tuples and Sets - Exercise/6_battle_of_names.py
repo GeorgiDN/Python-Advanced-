@@ -20,6 +20,11 @@ else:
 
 # Do not to this!
 
+# count_names, even, odd = int(input()), set(), set()
+# [even.add(s) if s % 2 == 0 else odd.add(s) for row, name in enumerate([input() for _ in range(count_names)], 1) if (s := sum(ord(ch) for ch in name) // row)]
+# print(', '.join(map(str, even.union(odd) if sum(even) == sum(odd) else odd if sum(even) < sum(odd) else even.symmetric_difference(odd))))
+
+
 # count_names = int(input())
 # names, even, odd = [input() for _ in range(count_names)], set(), set()
 # [even.add(sum(ord(ch) for ch in name) // row) if sum(ord(ch) for ch in name) // row % 2 == 0 else odd.add(sum(ord(ch) for ch in name) // row) for row, name in enumerate(names, start=1)]
