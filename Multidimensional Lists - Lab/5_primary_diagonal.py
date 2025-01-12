@@ -4,6 +4,10 @@ primary_diagonal_sum = sum([sum(matrix[i][i] for i in range(rows))])
 print(primary_diagonal_sum)
 
 
+# rows = int(input())
+# matrix = [[int(x) for x in input().split()] for _ in range(rows)]
+# print(sum(matrix[i][i] for i in range(rows)))
+
 
 # IT DOES NOT WORK IN JUDGE SYSTEM THIS SYNTAX -> :=
 # rows = int(input())
