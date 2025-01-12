@@ -1,7 +1,28 @@
-rows, cols = [int(x) for x in input().split(", ")]
-matrix = [[int(x) for x in input().split()] for _ in range(rows)]
+rows, cols = list(map(int, input().split(', ')))
+matrix = [[int(x) for x in input().split(' ')] for _ in range(rows)]
+sum_cols = [sum(matrix[row][col] for row in range(rows)) for col in range(cols)]
+print('\n'.join(map(str, sum_cols)))
 
-print('\n'.join(map(str, [sum(row[col] for row in matrix) for col in range(cols)])))
+
+# rows, cols = map(int, input().split(', '))
+# matrix = [[int(x) for x in input().split(' ')] for _ in range(rows)]
+# sum_cols = []
+#
+# for col in range(cols):
+#     total_sum = 0
+#     for row in range(rows):
+#         num = matrix[row][col]
+#         total_sum += num
+#     sum_cols.append(total_sum)
+#
+# print('\n'.join(map(str, sum_cols)))
+
+
+
+# rows, cols = [int(x) for x in input().split(", ")]
+# matrix = [[int(x) for x in input().split()] for _ in range(rows)]
+
+# print('\n'.join(map(str, [sum(row[col] for row in matrix) for col in range(cols)])))
 
 
 
