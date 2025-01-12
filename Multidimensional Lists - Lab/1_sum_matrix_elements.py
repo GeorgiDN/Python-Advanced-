@@ -6,6 +6,11 @@ print(total_sum)
 print(matrix)
 
 
+# rows, cols = list(map(int, input().split(', ')))
+# matrix = [list(map(int, input().split(', '))) for _ in range(rows)]
+# print(sum([num for row in matrix for num in row]))
+# print(matrix)
+
 
 # rows, columns = [int(x) for x in input().split(", ")]
 # matrix = []
