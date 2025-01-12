@@ -1,26 +1,31 @@
 rows = int(input())
 matrix = [[x for x in input()] for _ in range(rows)]
-searched_symbol = input()
-founded_symbol = next(((row, col) for row in range(rows) for col in range(rows) if matrix[row][col] == searched_symbol), None)
-print(founded_symbol) if founded_symbol else print(f"{searched_symbol} does not occur in the matrix")
+symbol = input()
+found = False
+
+for idx in range(rows):
+    if not found:
+        row = matrix[idx]
+        if symbol in row:
+            found = True
+            print((idx, row.index(symbol)))
+            break
+
+if not found:
+    print(f'{symbol} does not occur in the matrix')
+
+
 
 
 
 # rows = int(input())
 # matrix = [[x for x in input()] for _ in range(rows)]
-# symbol = input()
-# found = False
+# searched_symbol = input()
+# founded_symbol = next(((row, col) for row in range(rows) for col in range(rows) if matrix[row][col] == searched_symbol), None)
+# print(founded_symbol) if founded_symbol else print(f"{searched_symbol} does not occur in the matrix")
 
-# for idx in range(rows):
-#     if not found:
-#         row = matrix[idx]
-#         if symbol in row:
-#             found = True
-#             print((idx, row.index(symbol)))
-#             break
 
-# if not found:
-#     print(f'{symbol} does not occur in the matrix')
+
 
 
 # rows = int(input())
