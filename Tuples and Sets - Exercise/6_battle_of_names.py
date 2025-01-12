@@ -18,6 +18,15 @@ else:
     print(', '.join(map(str, even.symmetric_difference(odd))))
 
 
+# Do not to this!
+
+# count_names = int(input())
+# names, even, odd = [input() for _ in range(count_names)], set(), set()
+# [even.add(sum(ord(ch) for ch in name) // row) if sum(ord(ch) for ch in name) // row % 2 == 0 else odd.add(sum(ord(ch) for ch in name) // row) for row, name in enumerate(names, start=1)]
+# print(', '.join(map(str, even.union(odd)))) if sum(even) == sum(odd) else print(', '.join(map(str, odd))) if sum(even) < sum(odd) else print(', '.join(map(str, even.symmetric_difference(odd))))
+
+
+
 
 # def print_result(result_):
 #     print(', '.join(map(str, result_)))
