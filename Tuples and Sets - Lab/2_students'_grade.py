@@ -1,18 +1,27 @@
-number_of_students = int(input())
-students_records = {}
+from collections import defaultdict
 
-for _ in range(number_of_students):
-    name, grade = input().split()
-    grade = float(grade)
+records = int(input())
+person_data = defaultdict(list)
+[person_data[name].append(float(grade)) for _ in range(records) for name, grade in [input().split()]]
+[print(f"{name} -> {' '.join(f'{grade:.2f}' for grade in grades)} (avg: {sum(grades) / len(grades):.2f})")
+ for name, grades in dict(person_data).items()]
 
-    if name not in students_records:
-        students_records[name] = []
-    students_records[name].append(grade)
 
-for curr_name, marks in students_records.items():
-    average_grade = sum(marks) / len(marks)
-    formatted_grades = [f"{mark:.2f}" for mark in marks]
-    print(f"{curr_name} -> {' '.join(map(str, formatted_grades))} (avg: {average_grade:.2f})")
+# number_of_students = int(input())
+# students_records = {}
+
+# for _ in range(number_of_students):
+#     name, grade = input().split()
+#     grade = float(grade)
+
+#     if name not in students_records:
+#         students_records[name] = []
+#     students_records[name].append(grade)
+
+# for curr_name, marks in students_records.items():
+#     average_grade = sum(marks) / len(marks)
+#     formatted_grades = [f"{mark:.2f}" for mark in marks]
+#     print(f"{curr_name} -> {' '.join(map(str, formatted_grades))} (avg: {average_grade:.2f})")
 
 
 
