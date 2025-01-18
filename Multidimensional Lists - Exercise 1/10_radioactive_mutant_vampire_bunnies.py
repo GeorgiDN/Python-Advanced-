@@ -1,45 +1,43 @@
 directions = {
-        'U': (-1, 0),
-        'D': (1, 0),
-        'L': (0, -1),
-        'R': (0, 1)
-    }
+    'U': (-1, 0),
+    'D': (1, 0),
+    'L': (0, -1),
+    'R': (0, 1)
+}
 
 rows, cols = list(map(int, input().split()))
 p_row, p_col, matrix = 0, 0, []
 player, bunny, empty = 'P', 'B', '.'
 player_is_dead, player_win = False, False
+bunnies_coordinates = set()
 
 
-def is_valid_idx(idx, value):
-    return 0 <= idx < value
+def is_valid_index(index, max_value):
+    return 0 <= index < max_value
 
 
-def next_move(b_row, b_col, dir_):
-    d_row, d_col = directions[dir_][0], directions[dir_][1]
-    next_row = b_row + d_row if is_valid_idx(b_row + d_row, rows) else None
-    next_col = b_col + d_col if is_valid_idx(b_col + d_col, cols) else None
+def next_move(p_row, p_col, direction):
+    d_row, d_col = directions[direction][0], directions[direction][1]
+    next_row = p_row + d_row if is_valid_index(p_row + d_row, rows) else None
+    next_col = p_col + d_col if is_valid_index(p_col + d_col, cols) else None
 
     return next_row, next_col
 
 
-def bunny_spread(player_is_dead):
-    bunnies = []
-    for row in range(rows):
-        for col in range(cols):
-            if matrix[row][col] == bunny:
-                bunnies.append([row, col])
-
-    for b_row, b_col in bunnies:
+def bunny_spread(p_row, p_col, matrix, bunnies_coordinates, player_is_dead):
+    bunnies = set()
+    for b_row, b_col in bunnies_coordinates:
         for direction in directions.values():
             d_row, d_col = direction[0], direction[1]
             new_row, new_col = b_row + d_row, b_col + d_col
-            if is_valid_idx(new_row, rows) and is_valid_idx(new_col, cols):
+            if is_valid_index(new_row, rows) and is_valid_index(new_col, cols):
                 if matrix[new_row][new_col] == player:
                     player_is_dead = True
                 matrix[new_row][new_col] = bunny
+                bunnies.add((new_row, new_col))
+    bunnies_coordinates = bunnies_coordinates.union(bunnies)
 
-    return matrix, player_is_dead
+    return matrix, bunnies_coordinates, player_is_dead
 
 
 for idx in range(rows):
@@ -48,34 +46,121 @@ for idx in range(rows):
     if player in row:
         p_row = idx
         p_col = row.index(player)
+    if bunny in row:
+        for c in range(cols):
+            if matrix[idx][c] == bunny:
+                b_row, b_col = idx, c
+                bunnies_coordinates.add((b_row, b_col))
 
-moves = list(input())
+commands = list(input())
 
-for move in moves:
-    next_row, next_col = next_move(p_row, p_col, move)
+for command in commands:
+    next_row, next_col = next_move(p_row, p_col, command)
 
     if next_row is None or next_col is None:
         player_win = True
         matrix[p_row][p_col] = empty
-
     else:
         if matrix[next_row][next_col] == bunny:
-            player_is_dead = True
+            player_dead = True
             p_row, p_col = next_row, next_col
         else:
             matrix[p_row][p_col] = empty
             p_row, p_col = next_row, next_col
             matrix[p_row][p_col] = player
 
-    matrix, player_is_dead = bunny_spread(player_is_dead)
+    matrix, bunnies_coordinates, player_is_dead = (
+        bunny_spread(p_row, p_col, matrix, bunnies_coordinates, player_is_dead))
 
-    if player_is_dead or player_win:
+    if player_win or player_is_dead:
         break
 
 for row in matrix:
     print(''.join(row))
 
-print(f'won: {p_row} {p_col}') if player_win else print(f'dead: {p_row} {p_col}')
+status = 'won' if player_win else 'dead'
+print(f'{status}: {p_row} {p_col}')
+
+
+
+# directions = {
+#         'U': (-1, 0),
+#         'D': (1, 0),
+#         'L': (0, -1),
+#         'R': (0, 1)
+#     }
+
+# rows, cols = list(map(int, input().split()))
+# p_row, p_col, matrix = 0, 0, []
+# player, bunny, empty = 'P', 'B', '.'
+# player_is_dead, player_win = False, False
+
+
+# def is_valid_idx(idx, value):
+#     return 0 <= idx < value
+
+
+# def next_move(b_row, b_col, dir_):
+#     d_row, d_col = directions[dir_][0], directions[dir_][1]
+#     next_row = b_row + d_row if is_valid_idx(b_row + d_row, rows) else None
+#     next_col = b_col + d_col if is_valid_idx(b_col + d_col, cols) else None
+
+#     return next_row, next_col
+
+
+# def bunny_spread(player_is_dead):
+#     bunnies = []
+#     for row in range(rows):
+#         for col in range(cols):
+#             if matrix[row][col] == bunny:
+#                 bunnies.append([row, col])
+
+#     for b_row, b_col in bunnies:
+#         for direction in directions.values():
+#             d_row, d_col = direction[0], direction[1]
+#             new_row, new_col = b_row + d_row, b_col + d_col
+#             if is_valid_idx(new_row, rows) and is_valid_idx(new_col, cols):
+#                 if matrix[new_row][new_col] == player:
+#                     player_is_dead = True
+#                 matrix[new_row][new_col] = bunny
+
+#     return matrix, player_is_dead
+
+
+# for idx in range(rows):
+#     row = list(input())
+#     matrix.append(row)
+#     if player in row:
+#         p_row = idx
+#         p_col = row.index(player)
+
+# moves = list(input())
+
+# for move in moves:
+#     next_row, next_col = next_move(p_row, p_col, move)
+
+#     if next_row is None or next_col is None:
+#         player_win = True
+#         matrix[p_row][p_col] = empty
+
+#     else:
+#         if matrix[next_row][next_col] == bunny:
+#             player_is_dead = True
+#             p_row, p_col = next_row, next_col
+#         else:
+#             matrix[p_row][p_col] = empty
+#             p_row, p_col = next_row, next_col
+#             matrix[p_row][p_col] = player
+
+#     matrix, player_is_dead = bunny_spread(player_is_dead)
+
+#     if player_is_dead or player_win:
+#         break
+
+# for row in matrix:
+#     print(''.join(row))
+
+# print(f'won: {p_row} {p_col}') if player_win else print(f'dead: {p_row} {p_col}')
 
 
 
