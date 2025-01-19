@@ -1,65 +1,133 @@
-def is_valid_index(idx, size):
-    return 0 <= idx < size
+def is_valid_index(value, max_value):
+    return 0 <= value < max_value
 
 
-size, matrix, shoot_targets, empty = 5, [], [], "."
-row, col, targets_left = 0, 0, 0
+directions = {
+    'up': (-1, 0),
+    'down': (1, 0),
+    'left': (0, -1),
+    'right': (0, 1)
+}
 
-directions = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
+rows = 5
+matrix, player, target, empty = [], 'A', 'x', '.'
+p_row, p_col = 0, 0
+targets_left = 0
+shoot_targets = []
 
-for r in range(size):
-    current_row = input().split()
-    matrix.append(current_row)
-    for c in range(size):
-        if matrix[r][c] == "x":
-            targets_left += 1
-        if matrix[r][c] == "A":
-            row, col = r, c
+for idx in range(rows):
+    row = input().split()
+    matrix.append(row)
+    if player in row:
+        p_row, p_col = idx, row.index(player)
+    if target in row:
+        targets_left += row.count(target)
 
-commands_count = int(input())
+count_targets = targets_left
+number_commands = int(input())
 
-for _ in range(commands_count):
+for _ in range(number_commands):
     if targets_left == 0:
         break
-    data = input().split()
-    command, direction = data[0], data[1]
+    command_info = input().split()
+    command = command_info[0]
+    direction = command_info[1]
     d_row, d_col = directions[direction][0], directions[direction][1]
-    if command == "move":
-        steps = int(data[2])
-        next_row = row + d_row * steps
-        next_col = col + d_col * steps
-        if is_valid_index(next_row, size) and is_valid_index(next_col, size) and \
-            matrix[next_row][next_col] == empty:
-                matrix[next_row][next_col] = 'A'
-                matrix[row][col] = '.'
-                row, col = next_row, next_col
 
-    elif command == "shoot":
-        current_row, current_col = row, col
-        for _ in range(size):
-            if targets_left == 0:
+    if command == 'move':
+        steps = int(command_info[2])
+        next_row = p_row + d_row * steps
+        next_col = p_col + d_col * steps
+        if (is_valid_index(next_row, rows)
+                and is_valid_index(next_col, rows)
+                and matrix[next_row][next_col] == empty):
+            matrix[p_row][p_col] = empty
+            p_row, p_col = next_row, next_col
+            matrix[p_row][p_col] = empty
+
+    elif command == 'shoot':
+        shoot_row, shoot_col = p_row + d_row, p_col + d_col
+        while is_valid_index(shoot_row, rows) and is_valid_index(shoot_col, rows):
+            if matrix[shoot_row][shoot_col] == target:
+                targets_left -= 1
+                shoot_targets.append([shoot_row, shoot_col])
+                matrix[shoot_row][shoot_col] = empty
                 break
-            next_row, next_col = row + d_row, col + d_col
-            if is_valid_index(next_row, size) and is_valid_index(next_col, size):
-                if matrix[next_row][next_col] == "x":
-                    matrix[next_row][next_col] = empty
-                    targets_left -= 1
-                    shoot_targets.append([next_row, next_col])
-                    break
-                row, col = next_row, next_col
-            else:
-                break
-        row, col = current_row, current_col
+            shoot_row, shoot_col = shoot_row + d_row, shoot_col + d_col
 
-print(f"Training completed! All {len(shoot_targets)} targets hit.") if targets_left == 0 \
-    else print(f"Training not completed! {targets_left} targets left.")
+if targets_left == 0:
+    print(f'Training completed! All {count_targets} targets hit.')
+else:
+    print(f"Training not completed! {targets_left} targets left.")
 
-for target in shoot_targets:
-    print(target)
+[print(t) for t in shoot_targets]
+    
 
 
 
+############################################################################################################################################################################################################
+# def is_valid_index(idx, size):
+#     return 0 <= idx < size
 
+
+# size, matrix, shoot_targets, empty = 5, [], [], "."
+# row, col, targets_left = 0, 0, 0
+
+# directions = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
+
+# for r in range(size):
+#     current_row = input().split()
+#     matrix.append(current_row)
+#     for c in range(size):
+#         if matrix[r][c] == "x":
+#             targets_left += 1
+#         if matrix[r][c] == "A":
+#             row, col = r, c
+
+# commands_count = int(input())
+
+# for _ in range(commands_count):
+#     if targets_left == 0:
+#         break
+#     data = input().split()
+#     command, direction = data[0], data[1]
+#     d_row, d_col = directions[direction][0], directions[direction][1]
+#     if command == "move":
+#         steps = int(data[2])
+#         next_row = row + d_row * steps
+#         next_col = col + d_col * steps
+#         if is_valid_index(next_row, size) and is_valid_index(next_col, size) and \
+#             matrix[next_row][next_col] == empty:
+#                 matrix[next_row][next_col] = 'A'
+#                 matrix[row][col] = '.'
+#                 row, col = next_row, next_col
+
+#     elif command == "shoot":
+#         current_row, current_col = row, col
+#         for _ in range(size):
+#             if targets_left == 0:
+#                 break
+#             next_row, next_col = row + d_row, col + d_col
+#             if is_valid_index(next_row, size) and is_valid_index(next_col, size):
+#                 if matrix[next_row][next_col] == "x":
+#                     matrix[next_row][next_col] = empty
+#                     targets_left -= 1
+#                     shoot_targets.append([next_row, next_col])
+#                     break
+#                 row, col = next_row, next_col
+#             else:
+#                 break
+#         row, col = current_row, current_col
+
+# print(f"Training completed! All {len(shoot_targets)} targets hit.") if targets_left == 0 \
+#     else print(f"Training not completed! {targets_left} targets left.")
+
+# for target in shoot_targets:
+#     print(target)
+
+
+
+############################################################################################################################################################################################################
 # def fill_the_matrix_and_find_shooter_and_targets(s_row, s_col, mtrx_size):
 #     num_targets = 0
 #     matrix = []
@@ -157,7 +225,7 @@ for target in shoot_targets:
 
 
 
-
+####################################################################################################################################################################################################################################
 # def fill_the_matrix_and_find_shooter_and_targets(s_row, s_col, mtrx_size):
 #     num_targets = 0
 #     matrix = []
