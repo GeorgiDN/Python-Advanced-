@@ -1,8 +1,20 @@
 def grocery_store(**kwargs):
-    products = dict(sorted(kwargs.items(), key=lambda x: (-x[1], -len(x[0]), x[0])))
+    sorted_products = dict(sorted(kwargs.items(), key=lambda x: (-x[1], -len(x[0]), x[0])))
 
-    result = "\n".join([f"{product}: {qty}" for product, qty in products.items()])
-    return result
+    return '\n'.join([f"{product}: {qty}" for product, qty in sorted_products.items()])
+
+
+######################################################################################################################################################
+# def grocery_store(**kwargs):
+#     return '\n'.join([f"{product}: {qty}" for product, qty in dict(sorted(kwargs.items(), key=lambda x: (-x[1], -len(x[0]), x[0]))).items()])
+
+
+######################################################################################################################################################
+# def grocery_store(**kwargs):
+#     products = dict(sorted(kwargs.items(), key=lambda x: (-x[1], -len(x[0]), x[0])))
+
+#     result = "\n".join([f"{product}: {qty}" for product, qty in products.items()])
+#     return result
 
 
 print(grocery_store(
