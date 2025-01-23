@@ -1,60 +1,143 @@
-def is_valid_index(rows, idx):
-    return 0 <= idx < rows
+def is_valid_index(idx, value):
+    return 0 <= idx < value
 
 
-rows = int(input())
-grid = []
-s_row, s_col = 0, 0
-meteorite, planet_b, resources, empty = 'M', 'P', 'R', '.'
-units, max_units = 100, 100
+def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player):
+    matrix = []
+    for idx in range(rows):
+        row = input().split()
+        matrix.append(row)
+        if player in row:
+            pl_row = idx
+            pl_col = row.index(player)
 
-moves = {
-    'up': (-1, 0),
-    'down': (1, 0),
-    'left': (0, -1),
-    'right': (0, 1)
-}
+    return matrix, pl_row, pl_col
 
-for i in range(rows):
-    row = input().split()
-    grid.append(row)
-    if 'S' in row:
-        s_row, s_col = i, row.index('S')
 
-while True:
-    if units == 0:
-        print('Mission failed! The spaceship was stranded in space.')
-        grid[s_row][s_col] = 'S'
-        break
+def next_move(pl_row, pl_col, direction, rows):
+    moves = {
+        'up': (-1, 0),
+        'down': (1, 0),
+        'left': (0, -1),
+        'right': (0, 1)
+    }
+    d_row, d_col = moves[direction][0], moves[direction][1]
+    next_row = (pl_row + d_row) if is_valid_index(pl_row + d_row, rows) else None
+    next_col = (pl_col + d_col) if is_valid_index(pl_col + d_col, rows) else None
 
-    command = input()
+    return next_row, next_col
 
-    next_row, next_col = s_row + moves[command][0], s_col + moves[command][1]
-    units -= 5
 
-    if not is_valid_index(rows, next_row) or not is_valid_index(rows, next_col):
-        grid[s_row][s_col] = 'S'
-        print('Mission failed! The spaceship was lost in space.')
-        break
+def main():
+    rows = int(input())
+    pl_row, pl_col = 0, 0
+    player, empty, meteorite, planet_b, resources_station = 'S', '.', 'M', 'P', 'R'
+    max_resources = 100
+    resources_units = 100
+    refuel_sum = 10
 
-    elif grid[next_row][next_col] == meteorite:
-        units -= 5
+    matrix, pl_row, pl_col = (
+        fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
 
-    elif grid[next_row][next_col] == resources:
-        units = min(units + 10, max_units)
+    while True:
 
-    elif grid[next_row][next_col] == planet_b:
-        print(f'Mission accomplished! The spaceship reached Planet B with {units} resources left.')
-        break
+        if resources_units < 5:
+            print('Mission failed! The spaceship was stranded in space.')
+            matrix[pl_row][pl_col] = player
+            break
 
-    if not grid[s_row][s_col] == resources:
-        grid[s_row][s_col] = empty
-    if not grid[next_row][next_col] == resources:
-        grid[next_row][next_col] = empty
-    s_row, s_col = next_row, next_col
+        direction = input()
 
-for row in grid:
-    print(' '.join(row))
+        next_row, next_col = next_move(pl_row, pl_col, direction, rows)
+        resources_units -= 5
+
+        if next_row is None or next_col is None:
+            print('Mission failed! The spaceship was lost in space.')
+            matrix[pl_row][pl_col] = player
+            break
+
+        elif matrix[next_row][next_col] == resources_station:  # R
+            resources_units = min(resources_units + refuel_sum, max_resources)
+            pl_row, pl_col = next_row, next_col
+            continue
+
+        elif matrix[next_row][next_col] == meteorite:
+            resources_units -= 5
+
+        elif matrix[next_row][next_col] == planet_b:
+            print(f'Mission accomplished! The spaceship reached Planet B with {resources_units} resources left.')
+            break
+
+        if matrix[pl_row][pl_col] != resources_station:
+            matrix[pl_row][pl_col] = empty
+        pl_row, pl_col = next_row, next_col
+        matrix[pl_row][pl_col] = empty
+
+    for row in matrix:
+        print(' '.join(row))
+    
+
+if __name__ == '__main__':
+    main()
+
+
+# def is_valid_index(rows, idx):
+#     return 0 <= idx < rows
+
+
+# rows = int(input())
+# grid = []
+# s_row, s_col = 0, 0
+# meteorite, planet_b, resources, empty = 'M', 'P', 'R', '.'
+# units, max_units = 100, 100
+
+# moves = {
+#     'up': (-1, 0),
+#     'down': (1, 0),
+#     'left': (0, -1),
+#     'right': (0, 1)
+# }
+
+# for i in range(rows):
+#     row = input().split()
+#     grid.append(row)
+#     if 'S' in row:
+#         s_row, s_col = i, row.index('S')
+
+# while True:
+#     if units == 0:
+#         print('Mission failed! The spaceship was stranded in space.')
+#         grid[s_row][s_col] = 'S'
+#         break
+
+#     command = input()
+
+#     next_row, next_col = s_row + moves[command][0], s_col + moves[command][1]
+#     units -= 5
+
+#     if not is_valid_index(rows, next_row) or not is_valid_index(rows, next_col):
+#         grid[s_row][s_col] = 'S'
+#         print('Mission failed! The spaceship was lost in space.')
+#         break
+
+#     elif grid[next_row][next_col] == meteorite:
+#         units -= 5
+
+#     elif grid[next_row][next_col] == resources:
+#         units = min(units + 10, max_units)
+
+#     elif grid[next_row][next_col] == planet_b:
+#         print(f'Mission accomplished! The spaceship reached Planet B with {units} resources left.')
+#         break
+
+#     if not grid[s_row][s_col] == resources:
+#         grid[s_row][s_col] = empty
+#     if not grid[next_row][next_col] == resources:
+#         grid[next_row][next_col] = empty
+#     s_row, s_col = next_row, next_col
+
+# for row in grid:
+#     print(' '.join(row))
 
 
 
