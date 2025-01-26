@@ -1,0 +1,10 @@
+.css
+- - - css_current_directory.css
+.html
+- - - html_current_directory.html
+.js
+- - - from_first_level.js
+- - - js_current_directory.js
+.py
+- - - from_first_level.py
+- - - python_current_directory.py
