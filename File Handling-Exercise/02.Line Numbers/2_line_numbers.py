@@ -1,3 +1,38 @@
+from string import punctuation
+
+text_file = 'text.txt'
+output_text_file = 'output.txt'
+chars_data = {}
+
+with open(text_file, "r") as input_file:
+    text = input_file.readlines()
+
+for row in range(len(text)):
+    punctuation_marks = 0
+    letters_number = 0
+    line = text[row].strip()
+    for char in line:
+        if char in punctuation:
+            punctuation_marks += 1
+        elif char.isalpha():
+            letters_number += 1
+    chars_data[f'Line {row + 1}'] = {
+        'content': line,
+        'letters': letters_number,
+        'punctuation': punctuation_marks
+    }
+
+with open(output_text_file, "w") as output_file:
+    total_lines = len(chars_data)
+    for index, (key, data) in enumerate(chars_data.items(), 1):
+        result = f'{key}: {data["content"]} ({data["letters"]})({data["punctuation"]})'
+        if index < total_lines:
+            result += '\n'
+        output_file.write(result)
+
+
+
+
 ###################################################################################################################
 # from string import punctuation
 
