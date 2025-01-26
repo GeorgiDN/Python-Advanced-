@@ -1,19 +1,35 @@
-from collections import deque
-
 text_file = 'text.txt'
-symbols_for_replace = ["-", ",", ".", "!", "?"]
+symbols_for_replace = {"-", ",", ".", "!", "?"}
 
-with open(text_file, 'r') as file:
-    for idx, line in enumerate(file):
-        result = deque()
-        if idx == 0 or idx % 2 == 0:
-            words = line.split()
-            for word in words:
-                for letter in word:
-                    if letter in symbols_for_replace:
-                        word = word.replace(letter, "@")
-                result.appendleft(word)
-            print(' '.join(result))
+with open(text_file, "r") as file:
+    text = file.readlines()
+
+for row in range(0, len(text), 2):
+    line = text[row].strip()
+    for symbol in symbols_for_replace:
+        line = line.replace(symbol, "@")
+    reversed_words = " ".join(line.split()[::-1])
+    print(reversed_words)
+
+
+
+###########################################################################################################################################
+# from collections import deque
+
+# text_file = 'text.txt'
+# symbols_for_replace = ["-", ",", ".", "!", "?"]
+
+# with open(text_file, 'r') as file:
+#     for idx, line in enumerate(file):
+#         result = deque()
+#         if idx == 0 or idx % 2 == 0:
+#             words = line.split()
+#             for word in words:
+#                 for letter in word:
+#                     if letter in symbols_for_replace:
+#                         word = word.replace(letter, "@")
+#                 result.appendleft(word)
+#             print(' '.join(result))
 
 
 
