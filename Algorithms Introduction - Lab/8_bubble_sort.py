@@ -1,21 +1,35 @@
-def bubble_sort(nums):
-    is_sorted = False
-    i = 0
+def bubble_sort(arr):
+    for i in range(len(arr)):
+        for j in range(i+1, len(arr)):
+            if arr[i] > arr[j]:
+                arr[i], arr[j] = arr[j], arr[i]
 
-    while not is_sorted:
-        is_sorted = True
-
-        for j in range(1, len(nums) - i):
-            if nums[j - 1] > nums[j]:
-                nums[j], nums[j - 1] = nums[j - 1], nums[j]
-                is_sorted = False
-
-        i += 1
+    return ' '.join(map(str, arr))
 
 
-nums = list(map(int, input().split()))
-bubble_sort(nums)
-print(*nums)
+arr = list(map(int, input().split()))
+print(bubble_sort(arr))
+
+
+######################################################
+# def bubble_sort(nums):
+#     is_sorted = False
+#     i = 0
+
+#     while not is_sorted:
+#         is_sorted = True
+
+#         for j in range(1, len(nums) - i):
+#             if nums[j - 1] > nums[j]:
+#                 nums[j], nums[j - 1] = nums[j - 1], nums[j]
+#                 is_sorted = False
+
+#         i += 1
+
+
+# nums = list(map(int, input().split()))
+# bubble_sort(nums)
+# print(*nums)
 
 
 
