@@ -1,12 +1,12 @@
 def set_cover(universe, sets):
-    chosen_sets = []
+    chosen_set = []
 
     while universe:
         best_set = max(sets, key=lambda s: len(universe.intersection(s)))
-        chosen_sets.append(best_set)
-        universe -= set(best_set)
+        chosen_set.append(best_set)
+        universe -= best_set
 
-    return chosen_sets
+    return chosen_set
 
 
 universe = set(map(int, input().split(', ')))
