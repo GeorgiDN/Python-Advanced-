@@ -2,12 +2,10 @@ def recursive_drawing(n):
     if n == 0:
         return
 
-    print("*" * n)
+    print('*' * n)
     recursive_drawing(n - 1)
-    print("#" * n)
+    print('#' * n)
 
 
-num = int(input())
-recursive_drawing(num)
-
-
+n = int(input())
+recursive_drawing(n)
