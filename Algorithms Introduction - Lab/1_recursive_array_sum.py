@@ -1,8 +1,7 @@
-def calculate_sum(nums, idx):
-    if idx == len(nums) - 1:
-        return nums[idx]
-
-    return nums[idx] + calculate_sum(nums, idx + 1)
+def calculate_sum(nums, index):
+    if index == len(nums) - 1:
+        return nums[index]
+    return nums[index] + calculate_sum(nums, index + 1)
 
 
 list_numbers = [int(x) for x in input().split()]
