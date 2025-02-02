@@ -1,13 +1,12 @@
 def sum_of_coins(coins, target):
-    coins = sorted(coins, reverse=True)
-    idx = 0
-    used_coins = {}
-
+    coins.sort(reverse=True)
+    idx, used_coins = 0, {}
+    
     while True:
         if target <= 0 or idx >= len(coins):
             break
         count_coins = target // coins[idx]
-        target = target % coins[idx]
+        target %= coins[idx]
 
         if count_coins > 0:
             used_coins[coins[idx]] = count_coins
