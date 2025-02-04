@@ -19,36 +19,36 @@ def get_message(goals):
                 return message
 
 
-required_strength = list(map(int, input().split()))
-needed_accuracy = deque(map(int, input().split()))
-total_goals = 0
+strength_values = list(map(int, input().split()))
+accuracy_values = deque(map(int, input().split()))
+scored_goals = 0
 
-while required_strength and needed_accuracy:
-    strength = required_strength.pop()
-    accuracy = needed_accuracy.popleft()
+while strength_values and accuracy_values:
+    strength = strength_values.pop()
+    accuracy = accuracy_values.popleft()
 
-    if strength + accuracy == 100:
-        total_goals += 1
+    result = strength + accuracy
 
-    elif strength + accuracy < 100:
+    if result == 100:
+        scored_goals += 1
+
+    elif result < 100:
         if strength < accuracy:
-            needed_accuracy.appendleft(accuracy)
+            accuracy_values.appendleft(accuracy)
         elif strength > accuracy:
-            required_strength.append(strength)
+            strength_values.append(strength)
         else:
-            result = strength + accuracy
-            required_strength.append(result)
+            strength_values.append(result)
 
-    else:
+    elif result > 100:
         strength -= 10
-        required_strength.append(strength)
-        needed_accuracy.append(accuracy)
+        strength_values.append(strength)
+        accuracy_values.append(accuracy)
 
-print(get_message(total_goals))
-if total_goals > 0:
-    print(f"Goals scored: {total_goals}")
-
-if required_strength:
-    print(f"Strength values left: {', '.join(map(str, required_strength))}")
-if needed_accuracy:
-    print(f"Accuracy values left: {', '.join(map(str, needed_accuracy))}")
+print(get_message(scored_goals))
+if scored_goals > 0:
+    print(f"Goals scored: {scored_goals}")
+if strength_values:
+    print(f"Strength values left: {', '.join(map(str, strength_values))}")
+if accuracy_values:
+    print(f"Accuracy values left: {', '.join(map(str, accuracy_values))}")
