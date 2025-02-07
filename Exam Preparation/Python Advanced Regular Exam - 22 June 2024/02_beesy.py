@@ -1,78 +1,81 @@
-def fill_matrix_and_takes_positions(b_row, b_col, size):
-    field = []
-    for idx in range(size):
+def is_valid_index(idx, value):
+    return 0 <= idx < value
+
+
+def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player):
+    matrix = []
+    for idx in range(rows):
         row = list(input())
-        field.append(row)
-        if "B" in row:
-            b_row = idx
-            b_col = row.index("B")
-    return field, b_row, b_col
+        matrix.append(row)
+        if player in row:
+            pl_row, pl_col = idx, row.index(player)
+
+    return matrix, pl_row, pl_col
 
 
-def next_move(b_row, b_col, direction, size):
+def next_move(pl_row, pl_col, direction, rows):
     moves = {
-        "up": (-1, 0),
-        "down": (1, 0),
-        "left": (0, -1),
-        "right": (0, 1)
+        'up': (-1, 0),
+        'down': (1, 0),
+        'left': (0, -1),
+        'right': (0, 1)
     }
-    row, col = moves[direction][0], moves[direction][1]
-    next_row = (b_row + row) % size
-    next_col = (b_col + col) % size
+    
+    d_row, d_col = moves[direction][0], moves[direction][1]
+    next_row = (pl_row + d_row) % rows
+    next_col = (pl_col + d_col) % rows
     return next_row, next_col
 
 
 def main():
-    size = int(input())
-    b_row, b_col = 0, 0
-    field, b_row, b_col = fill_matrix_and_takes_positions(b_row, b_col, size)
-    nectar_goal, bee_energy, hive = 30, 15, "H"
-    collected_nectar = 0
-    hive_reached, restored_once = False, False
+    rows = int(input())
+    pl_row, pl_col = 0, 0
+    player, empty, hive = 'B', '-', 'H'
+    matrix, pl_row, pl_col = (
+        fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
+    energy_left = 15
+    collected_nectar, nectar_goal = 0, 30
+    restored_once, hive_reached = False, False
 
     while True:
-        if bee_energy == 0 and collected_nectar >= 30:
+        if energy_left == 0 and collected_nectar >= nectar_goal:
             if not restored_once:
-                amount_restored = collected_nectar - nectar_goal
-                bee_energy += amount_restored
-                collected_nectar = 30
+                energy_increase = collected_nectar - nectar_goal
+                energy_left += energy_increase
+                collected_nectar = nectar_goal
                 restored_once = True
             else:
                 break
 
-        if hive_reached or bee_energy == 0:
+        if energy_left == 0 or hive_reached:
             break
 
         direction = input()
-        next_row, next_col = next_move(b_row, b_col, direction, size)
-        bee_energy -= 1
 
-        if field[next_row][next_col].isdigit():
-            nectar_sum = int(field[next_row][next_col])
-            collected_nectar += nectar_sum
+        next_row, next_col = next_move(pl_row, pl_col, direction, rows)
+        energy_left -= 1
 
-        elif bee_energy == 0 and collected_nectar < 30:
-            field[b_row][b_col] = "-"
-            field[next_row][next_col] = "B"
-            break
+        if matrix[next_row][next_col].isdigit():
+            flower = int(matrix[next_row][next_col])
+            collected_nectar += flower
 
-        elif field[next_row][next_col] == hive:
+        if matrix[next_row][next_col] == hive:
             hive_reached = True
 
-        field[b_row][b_col] = "-"
-        b_row, b_col = next_row, next_col
-        field[next_row][next_col] = "B"
+        matrix[pl_row][pl_col] = empty
+        pl_row, pl_col = next_row, next_col
+        matrix[pl_row][pl_col] = player
 
     if hive_reached:
         if collected_nectar >= nectar_goal:
-            print(f"Great job, Beesy! The hive is full. Energy left: {bee_energy}")
+            print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
         else:
-            print("Beesy did not manage to collect enough nectar.")
+            print(f'Beesy did not manage to collect enough nectar.')
     else:
-        print("This is the end! Beesy ran out of energy.")
+        print('This is the end! Beesy ran out of energy.')
 
-    for row in field:
-        print("".join(row))
+    for row in matrix:
+        print(''.join(row))
 
 
 if __name__ == '__main__':
@@ -80,8 +83,7 @@ if __name__ == '__main__':
 
 
 
-
-
+###############################################################################################################################
 # def next_move(rows, row, col, direction):
 #     moves = {
 #         "up": (-1, 0),
