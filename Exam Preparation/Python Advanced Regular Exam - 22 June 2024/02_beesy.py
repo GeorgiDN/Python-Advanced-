@@ -20,10 +20,10 @@ def next_move(pl_row, pl_col, direction, rows):
         'left': (0, -1),
         'right': (0, 1)
     }
-    
     d_row, d_col = moves[direction][0], moves[direction][1]
     next_row = (pl_row + d_row) % rows
     next_col = (pl_col + d_col) % rows
+
     return next_row, next_col
 
 
@@ -35,19 +35,28 @@ def main():
         fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
     energy_left = 15
     collected_nectar, nectar_goal = 0, 30
-    restored_once, hive_reached = False, False
+    already_restored = False
+    hive_reached = False
 
     while True:
-        if energy_left == 0 and collected_nectar >= nectar_goal:
-            if not restored_once:
+
+        if hive_reached:
+            if collected_nectar >= nectar_goal:
+                print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
+            else:
+                print('Beesy did not manage to collect enough nectar.')
+            break
+
+        if energy_left <= 0 and collected_nectar >= nectar_goal:
+            if not already_restored:
                 energy_increase = collected_nectar - nectar_goal
                 energy_left += energy_increase
                 collected_nectar = nectar_goal
-                restored_once = True
+                already_restored = True
             else:
                 break
 
-        if energy_left == 0 or hive_reached:
+        if energy_left <= 0:
             break
 
         direction = input()
@@ -66,12 +75,7 @@ def main():
         pl_row, pl_col = next_row, next_col
         matrix[pl_row][pl_col] = player
 
-    if hive_reached:
-        if collected_nectar >= nectar_goal:
-            print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
-        else:
-            print(f'Beesy did not manage to collect enough nectar.')
-    else:
+    if not hive_reached:
         print('This is the end! Beesy ran out of energy.')
 
     for row in matrix:
@@ -80,6 +84,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
