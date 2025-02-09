@@ -1,79 +1,155 @@
-def next_move(direction, row, col, rows):
-    moves = {
-        "up": (-1, 0),
-        "down": (1, 0),
-        "left": (0, -1),
-        "right": (0, 1)
-    }
+def is_valid_index(idx, value):
+    return 0 <= idx < value
 
-    d_row, d_col = moves[direction]
-    row = (row + d_row)
-    col = (col + d_col)
-    return row, col
 
-def fill_the_field_and_find_jet_position(size, j_row, j_col, enemies):
-    field = []
-    for r in range(size):
+def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player, count_enemies):
+    matrix = []
+    for idx in range(rows):
         row = list(input())
-        field.append(row)
-        if "J" in row:
-            j_row = r
-            j_col = row.index("J")
-        if "E" in row:
-            enemies += row.count("E")
+        matrix.append(row)
+        if player in row:
+            pl_row = idx
+            pl_col = row.index(player)
+        if 'E' in row:
+            count_enemies += row.count('E')
 
-    return field, j_row, j_col, enemies
+    return matrix, pl_row, pl_col, count_enemies
+
+
+def next_move(pl_row, pl_col, direction, rows):
+    moves = {
+        'up': (-1, 0),
+        'down': (1, 0),
+        'left': (0, -1),
+        'right': (0, 1)
+    }
+    d_row, d_col = moves[direction][0], moves[direction][1]
+    next_row = (pl_row + d_row) if is_valid_index(pl_row + d_row, rows) else None
+    next_col = (pl_col + d_col) if is_valid_index(pl_col + d_col, rows) else None
+
+    return next_row, next_col
 
 
 def main():
-    size = int(input())
-    jet_row, jet_col = None, None
-    enemies = 0
-    field, jet_row, jet_col, enemies = fill_the_field_and_find_jet_position(size, jet_row, jet_col, enemies)
-    jet_armour = 300
-    line = ' '
+    rows = int(input())
+    pl_row, pl_col = 0, 0
+    count_enemies = 0
+    jet, empty, enemy, repair = 'J', '-', 'E', 'R'
+    armour = 300
+    matrix, pl_row, pl_col, count_enemies = (
+        fill_matrix_and_takes_pos(pl_row, pl_col, rows, jet, count_enemies))
 
-    while line:
-        line = input()
+    while True:
 
-        next_row, next_col = next_move(line, jet_row, jet_col, size)
-        field[jet_row][jet_col] = "-"
+        if armour == 0:
+            print(f'Mission failed, your jetfighter was shot down! Last coordinates [{pl_row}, {pl_col}]!')
+            break
+        elif count_enemies == 0:
+            print('Mission accomplished, you neutralized the aerial threat!')
+            break
+        direction = input()
 
-        if field[next_row][next_col] == "E":
-            field[next_row][next_col] = "-"
-            enemies -= 1
-            if enemies == 0:
-                print("Mission accomplished, you neutralized the aerial threat!")
-                jet_row, jet_col = next_row, next_col
-                field[jet_row][jet_col] = "J"
-                break
-            else:
-                jet_armour -= 100
-                if jet_armour <= 0:
-                    jet_row, jet_col = next_row, next_col
-                    field[jet_row][jet_col] = "J"
-                    print(f"Mission failed, your jetfighter was shot down! Last coordinates [{jet_row}, {jet_col}]!")
-                    break
+        next_row, next_col = next_move(pl_row, pl_col, direction, rows)
 
-        elif field[next_row][next_col] == "R":
-            jet_armour = 300
-            field[next_row][next_col] = "-"
+        if matrix[next_row][next_col] == enemy:
+            armour -= 100
+            count_enemies -= 1
 
-        jet_row, jet_col = next_row, next_col
-        field[jet_row][jet_col] = "J"
+        if matrix[next_row][next_col] == repair:
+            armour = 300
 
-    for row_ in field:
-        print(''.join(row_))
+        matrix[pl_row][pl_col] = empty
+        pl_row, pl_col = next_row, next_col
+        matrix[pl_row][pl_col] = jet
+
+    for row in matrix:
+        print(''.join(row))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 
 
+###############################################################################################
+
+
+
+# def next_move(direction, row, col, rows):
+#     moves = {
+#         "up": (-1, 0),
+#         "down": (1, 0),
+#         "left": (0, -1),
+#         "right": (0, 1)
+#     }
+
+#     d_row, d_col = moves[direction]
+#     row = (row + d_row)
+#     col = (col + d_col)
+#     return row, col
+
+# def fill_the_field_and_find_jet_position(size, j_row, j_col, enemies):
+#     field = []
+#     for r in range(size):
+#         row = list(input())
+#         field.append(row)
+#         if "J" in row:
+#             j_row = r
+#             j_col = row.index("J")
+#         if "E" in row:
+#             enemies += row.count("E")
+
+#     return field, j_row, j_col, enemies
+
+
+# def main():
+#     size = int(input())
+#     jet_row, jet_col = None, None
+#     enemies = 0
+#     field, jet_row, jet_col, enemies = fill_the_field_and_find_jet_position(size, jet_row, jet_col, enemies)
+#     jet_armour = 300
+#     line = ' '
+
+#     while line:
+#         line = input()
+
+#         next_row, next_col = next_move(line, jet_row, jet_col, size)
+#         field[jet_row][jet_col] = "-"
+
+#         if field[next_row][next_col] == "E":
+#             field[next_row][next_col] = "-"
+#             enemies -= 1
+#             if enemies == 0:
+#                 print("Mission accomplished, you neutralized the aerial threat!")
+#                 jet_row, jet_col = next_row, next_col
+#                 field[jet_row][jet_col] = "J"
+#                 break
+#             else:
+#                 jet_armour -= 100
+#                 if jet_armour <= 0:
+#                     jet_row, jet_col = next_row, next_col
+#                     field[jet_row][jet_col] = "J"
+#                     print(f"Mission failed, your jetfighter was shot down! Last coordinates [{jet_row}, {jet_col}]!")
+#                     break
+
+#         elif field[next_row][next_col] == "R":
+#             jet_armour = 300
+#             field[next_row][next_col] = "-"
+
+#         jet_row, jet_col = next_row, next_col
+#         field[jet_row][jet_col] = "J"
+
+#     for row_ in field:
+#         print(''.join(row_))
+
+
+# if __name__ == "__main__":
+#     main()
 
 
 
 
+
+#######################################################################################################################################################
 # def is_valid(value, max_value):
 #     return 0 <= value < max_value
 
