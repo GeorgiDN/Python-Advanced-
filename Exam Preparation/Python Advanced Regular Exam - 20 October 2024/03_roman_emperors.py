@@ -1,7 +1,7 @@
 def list_roman_emperors(*args, **kwargs):
     successful_emperors = {name: kwargs[name] for name, status in args if status}
     unsuccessful_emperors = {name: kwargs[name] for name, status in args if not status}
-    
+
     sorted_successful_emperors = dict(sorted(successful_emperors.items(), key=lambda x: (-x[1], x[0])))
     sorted_unsuccessful_emperors = dict(sorted(unsuccessful_emperors.items(), key=lambda x: (x[1], x[0])))
     result = [f'Total number of emperors: {len(kwargs)}']
@@ -16,9 +16,40 @@ def list_roman_emperors(*args, **kwargs):
     return '\n'.join(map(str, result))
 
 
-print(list_roman_emperors(("Augustus", True), ("Nero", False), Augustus=40, Nero=14,))
-print(list_roman_emperors(("Augustus", True), ("Trajan", True), ("Nero", False), ("Caligula", False), ("Pertinax", False), ("Vespasian", True), Augustus=40, Trajan=19, Nero=14, Caligula=4, Pertinax=4, Vespasian=19,))
-print(list_roman_emperors(("Augustus", True), ("Trajan", True), ("Claudius", True), Augustus=40, Trajan=19, Claudius=13,))
+print(list_roman_emperors(("Augustus", True), ("Nero", False), Augustus=40, Nero=14, ))
+print(
+    list_roman_emperors(("Augustus", True), ("Trajan", True), ("Nero", False), ("Caligula", False), ("Pertinax", False),
+                        ("Vespasian", True), Augustus=40, Trajan=19, Nero=14, Caligula=4, Pertinax=4, Vespasian=19, ))
+print(list_roman_emperors(("Augustus", True), ("Trajan", True), ("Claudius", True), Augustus=40, Trajan=19,
+                          Claudius=13, ))
+
+
+############################################################################################
+# def list_roman_emperors(*args, **kwargs):
+#     successful_emperors = {}
+#     unsuccessful_emperors = {}
+#     result = [f'Total number of emperors: {len(kwargs)}']
+#
+#     def take_result(_type, data):
+#         result.append(f'{_type} emperors:')
+#         for name, value in data.items():
+#             result.append(f'****{name}: {value}')
+#
+#     for emperor_name, status in args:
+#         if status:
+#             successful_emperors[emperor_name] = kwargs[emperor_name]
+#         else:
+#             unsuccessful_emperors[emperor_name] = kwargs[emperor_name]
+#
+#     if successful_emperors:
+#         sorted_successful_emperors = dict(sorted(successful_emperors.items(), key=lambda x: (-x[1], x[0])))
+#         take_result('Successful', sorted_successful_emperors)
+#
+#     if unsuccessful_emperors:
+#         sorted_unsuccessful_emperors = dict(sorted(unsuccessful_emperors.items(), key=lambda x: (x[1], x[0])))
+#         take_result('Unsuccessful', sorted_unsuccessful_emperors)
+#
+#     return '\n'.join(result)
 
 
 
@@ -51,8 +82,6 @@ print(list_roman_emperors(("Augustus", True), ("Trajan", True), ("Claudius", Tru
 #         take_result('Unsuccessful emperors:', sorted_unsuccessful_emperors)
 
 #     return '\n'.join(map(str, result))
-
-
 
 
 ######################################################################################################################################
