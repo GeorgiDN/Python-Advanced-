@@ -8,7 +8,8 @@ def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player):
         row = list(input())
         matrix.append(row)
         if player in row:
-            pl_row, pl_col = idx, row.index(player)
+            pl_row = idx
+            pl_col = row.index(player)
 
     return matrix, pl_row, pl_col
 
@@ -23,7 +24,6 @@ def next_move(pl_row, pl_col, direction, rows):
     d_row, d_col = moves[direction][0], moves[direction][1]
     next_row = (pl_row + d_row) % rows
     next_col = (pl_col + d_col) % rows
-
     return next_row, next_col
 
 
@@ -33,36 +33,37 @@ def main():
     player, empty, hive = 'B', '-', 'H'
     matrix, pl_row, pl_col = (
         fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
-    energy_left = 15
-    collected_nectar, nectar_goal = 0, 30
-    already_restored = False
     hive_reached = False
+    energy = 15
+    collected_nectar = 0
+    required_nectar = 30
+    restored_energy = False
 
     while True:
 
         if hive_reached:
-            if collected_nectar >= nectar_goal:
-                print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
+            if collected_nectar >= required_nectar:
+                print(f'Great job, Beesy! The hive is full. Energy left: {energy}')
             else:
                 print('Beesy did not manage to collect enough nectar.')
             break
 
-        if energy_left <= 0 and collected_nectar >= nectar_goal:
-            if not already_restored:
-                energy_increase = collected_nectar - nectar_goal
-                energy_left += energy_increase
-                collected_nectar = nectar_goal
-                already_restored = True
+        if energy == 0 and collected_nectar >= required_nectar:
+            if not restored_energy:
+                energy_increase = collected_nectar - required_nectar
+                energy += energy_increase
+                collected_nectar = required_nectar
+                restored_energy = True
             else:
                 break
 
-        if energy_left <= 0:
+        if energy == 0:
             break
 
         direction = input()
 
         next_row, next_col = next_move(pl_row, pl_col, direction, rows)
-        energy_left -= 1
+        energy -= 1
 
         if matrix[next_row][next_col].isdigit():
             flower = int(matrix[next_row][next_col])
@@ -88,7 +89,183 @@ if __name__ == '__main__':
 
 
 
-###############################################################################################################################
+###############################################################################################
+# def is_valid_index(idx, value):
+#     return 0 <= idx < value
+#
+#
+# def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player):
+#     matrix = []
+#     for idx in range(rows):
+#         row = list(input())
+#         matrix.append(row)
+#         if player in row:
+#             pl_row, pl_col = idx, row.index(player)
+#
+#     return matrix, pl_row, pl_col
+#
+#
+# def next_move(pl_row, pl_col, direction, rows):
+#     moves = {
+#         'up': (-1, 0),
+#         'down': (1, 0),
+#         'left': (0, -1),
+#         'right': (0, 1)
+#     }
+#     d_row, d_col = moves[direction][0], moves[direction][1]
+#     next_row = (pl_row + d_row) % rows
+#     next_col = (pl_col + d_col) % rows
+#
+#     return next_row, next_col
+#
+#
+# def main():
+#     rows = int(input())
+#     pl_row, pl_col = 0, 0
+#     player, empty, hive = 'B', '-', 'H'
+#     matrix, pl_row, pl_col = (
+#         fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
+#     energy_left = 15
+#     collected_nectar, nectar_goal = 0, 30
+#     already_restored = False
+#     hive_reached = False
+#
+#     while True:
+#
+#         if hive_reached:
+#             if collected_nectar >= nectar_goal:
+#                 print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
+#             else:
+#                 print('Beesy did not manage to collect enough nectar.')
+#             break
+#
+#         if energy_left <= 0 and collected_nectar >= nectar_goal:
+#             if not already_restored:
+#                 energy_increase = collected_nectar - nectar_goal
+#                 energy_left += energy_increase
+#                 collected_nectar = nectar_goal
+#                 already_restored = True
+#             else:
+#                 break
+#
+#         if energy_left <= 0:
+#             break
+#
+#         direction = input()
+#
+#         next_row, next_col = next_move(pl_row, pl_col, direction, rows)
+#         energy_left -= 1
+#
+#         if matrix[next_row][next_col].isdigit():
+#             flower = int(matrix[next_row][next_col])
+#             collected_nectar += flower
+#
+#         if matrix[next_row][next_col] == hive:
+#             hive_reached = True
+#
+#         matrix[pl_row][pl_col] = empty
+#         pl_row, pl_col = next_row, next_col
+#         matrix[pl_row][pl_col] = player
+#
+#     if not hive_reached:
+#         print('This is the end! Beesy ran out of energy.')
+#
+#     for row in matrix:
+#         print(''.join(row))
+#
+#
+# if __name__ == '__main__':
+#     main()
+
+
+
+########################################################################
+# def is_valid_index(idx, value):
+#     return 0 <= idx < value
+#
+#
+# def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player):
+#     matrix = []
+#     for idx in range(rows):
+#         row = list(input())
+#         matrix.append(row)
+#         if player in row:
+#             pl_row, pl_col = idx, row.index(player)
+#
+#     return matrix, pl_row, pl_col
+#
+#
+# def next_move(pl_row, pl_col, direction, rows):
+#     moves = {
+#         'up': (-1, 0),
+#         'down': (1, 0),
+#         'left': (0, -1),
+#         'right': (0, 1)
+#     }
+#
+#     d_row, d_col = moves[direction][0], moves[direction][1]
+#     next_row = (pl_row + d_row) % rows
+#     next_col = (pl_col + d_col) % rows
+#     return next_row, next_col
+#
+#
+# def main():
+#     rows = int(input())
+#     pl_row, pl_col = 0, 0
+#     player, empty, hive = 'B', '-', 'H'
+#     matrix, pl_row, pl_col = (
+#         fill_matrix_and_takes_pos(pl_row, pl_col, rows, player))
+#     energy_left = 15
+#     collected_nectar, nectar_goal = 0, 30
+#     restored_once, hive_reached = False, False
+#
+#     while True:
+#         if energy_left == 0 and collected_nectar >= nectar_goal:
+#             if not restored_once:
+#                 energy_increase = collected_nectar - nectar_goal
+#                 energy_left += energy_increase
+#                 collected_nectar = nectar_goal
+#                 restored_once = True
+#             else:
+#                 break
+#
+#         if energy_left == 0 or hive_reached:
+#             break
+#
+#         direction = input()
+#
+#         next_row, next_col = next_move(pl_row, pl_col, direction, rows)
+#         energy_left -= 1
+#
+#         if matrix[next_row][next_col].isdigit():
+#             flower = int(matrix[next_row][next_col])
+#             collected_nectar += flower
+#
+#         if matrix[next_row][next_col] == hive:
+#             hive_reached = True
+#
+#         matrix[pl_row][pl_col] = empty
+#         pl_row, pl_col = next_row, next_col
+#         matrix[pl_row][pl_col] = player
+#
+#     if hive_reached:
+#         if collected_nectar >= nectar_goal:
+#             print(f'Great job, Beesy! The hive is full. Energy left: {energy_left}')
+#         else:
+#             print(f'Beesy did not manage to collect enough nectar.')
+#     else:
+#         print('This is the end! Beesy ran out of energy.')
+#
+#     for row in matrix:
+#         print(''.join(row))
+#
+#
+# if __name__ == '__main__':
+#     main()
+
+
+
+################################################################################################################
 # def next_move(rows, row, col, direction):
 #     moves = {
 #         "up": (-1, 0),
@@ -96,13 +273,13 @@ if __name__ == '__main__':
 #         "left": (0, -1),
 #         "right": (0, 1)
 #     }
-
+#
 #     d_row, d_col = moves[direction]
 #     row = (row + d_row) % rows
 #     col = (col + d_col) % rows
 #     return row, col
-
-
+#
+#
 # def fill_the_matrix_and_take_positions(rows, b_row, b_col):
 #     field = []
 #     for r in range(rows):
@@ -111,17 +288,17 @@ if __name__ == '__main__':
 #         if "B" in row:
 #             b_row = r
 #             b_col = row.index("B")
-
+#
 #     return field, b_row, b_col
-
-
+#
+#
 # def mark_passed_moves(field, b_row, b_col, next_row, next_col):
 #     field[b_row][b_col] = "-"
 #     b_row, b_col = next_row, next_col
 #     field[b_row][b_col] = "B"
 #     return field, b_row, b_col, next_row, next_col
-
-
+#
+#
 # def check_energy(bee_energy, collected_nectar, nectar_goal, restored_energy, successful_restored):
 #     if bee_energy == 0:
 #         if collected_nectar >= nectar_goal and not restored_energy:
@@ -130,10 +307,10 @@ if __name__ == '__main__':
 #             bee_energy += energy_restore
 #             collected_nectar = nectar_goal
 #             restored_energy = True
-
+#
 #     return bee_energy, collected_nectar, nectar_goal, restored_energy, successful_restored
-
-
+#
+#
 # def check_if_hive_reached(field, next_row, next_col, bee_energy, collected_nectar, nectar_goal, hive_reached):
 #     if field[next_row][next_col] == "H":
 #         hive_reached = True
@@ -142,20 +319,20 @@ if __name__ == '__main__':
 #         else:
 #             print("Beesy did not manage to collect enough nectar.")
 #     return hive_reached
-
-
+#
+#
 # def flowers_check(field, next_row, next_col, collected_nectar):
 #     if field[next_row][next_col].isdigit():
 #         flower = int(field[next_row][next_col])
 #         collected_nectar += flower
 #     return collected_nectar
-
-
+#
+#
 # def main():
 #     field = []
 #     bee_row, bee_col = 0, 0
 #     rows = int(input())
-
+#
 #     field, bee_row, bee_col = (
 #         fill_the_matrix_and_take_positions(rows, bee_row, bee_col))
 #     nectar_goal = 30
@@ -165,42 +342,42 @@ if __name__ == '__main__':
 #     successful_restored = False
 #     hive_reached = False
 #     out_of_energy_message = "This is the end! Beesy ran out of energy."
-
+#
 #     while True:
 #         bee_energy, collected_nectar, nectar_goal, restored_energy, successful_restored =\
 #             check_energy(bee_energy, collected_nectar, nectar_goal, restored_energy, successful_restored)
-
+#
 #         if not successful_restored and bee_energy == 0:
 #             print(out_of_energy_message)
 #             break
-
+#
 #         direction = input()
 #         next_row, next_col = next_move(rows, bee_row, bee_col, direction)
 #         bee_energy -= 1
-
+#
 #         hive_reached = (
 #             check_if_hive_reached(field, next_row, next_col, bee_energy, collected_nectar, nectar_goal, hive_reached))
-
+#
 #         if hive_reached:
 #             field, bee_row, bee_col, next_row, next_col = (
 #                 mark_passed_moves(field, bee_row, bee_col, next_row, next_col))  # Mark field with - and B
 #             break
-
+#
 #         collected_nectar = flowers_check(field, next_row, next_col, collected_nectar)  # Check for flowers
-
+#
 #         if restored_energy and bee_energy == 0:
 #             field, bee_row, bee_col, next_row, next_col = (
 #                 mark_passed_moves(field, bee_row, bee_col, next_row, next_col))  # Mark field with - and B
 #             print(out_of_energy_message)
 #             break
-
+#
 #         field, bee_row, bee_col, next_row, next_col = (
 #             mark_passed_moves(field, bee_row, bee_col, next_row, next_col))  # Mark field with - and B
-
+#
 #     for row in field:
 #         print(''.join(row))
-
-
+#
+#
 # if __name__ == '__main__':
 #     main()
 
