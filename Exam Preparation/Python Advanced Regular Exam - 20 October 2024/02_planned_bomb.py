@@ -94,8 +94,110 @@ if __name__ == '__main__':
     main()
 
 
+###########################################################################
+# def is_valid_index(idx, value):
+#     return 0 <= idx < value
+# 
+# 
+# def fill_matrix_and_takes_pos(pl_row, pl_col, rows, player, bomb_row, bomb_col):
+#     matrix = []
+#     for idx in range(rows):
+#         row = list(input())
+#         matrix.append(row)
+#         if player in row:
+#             pl_row = idx
+#             pl_col = row.index(player)
+#         if 'B' in row:
+#             bomb_row = idx
+#             bomb_col = row.index('B')
+# 
+#     return matrix, pl_row, pl_col, bomb_row, bomb_col
+# 
+# 
+# def next_move(pl_row, pl_col, direction, rows, cols):
+#     moves = {
+#         'up': (-1, 0),
+#         'down': (1, 0),
+#         'left': (0, -1),
+#         'right': (0, 1)
+#     }
+#     d_row, d_col = moves[direction][0], moves[direction][1]
+#     next_row = (pl_row + d_row) if is_valid_index(pl_row + d_row, rows) else None
+#     next_col = (pl_col + d_col) if is_valid_index(pl_col + d_col, cols) else None
+#     return next_row, next_col
+# 
+# 
+# def main():
+#     rows, cols = list(map(int, input().split(", ")))
+#     pl_row, pl_col = 0, 0
+#     bomb_row, bomb_col = 0, 0
+#     player, empty, terrorist, bomb = 'C', '*', 'T', 'B'
+#     matrix, pl_row, pl_col, bomb_row, bomb_col = (
+#         fill_matrix_and_takes_pos(pl_row, pl_col, rows, player, bomb_row, bomb_col))
+#     start_row, start_col = pl_row, pl_col
+#     seconds_left = 16
+#     defuse_time = 4
+# 
+#     while True:
+# 
+#         if seconds_left == 0:
+#             print('Terrorists win!')
+#             print('Bomb was not defused successfully!')
+#             print(f'Time needed: 0 second/s.')
+#             break
+# 
+#         direction = input()
+#         if direction == 'defuse' and (pl_row, pl_col) == (bomb_row, bomb_col):
+#             if seconds_left >= defuse_time:
+#                 seconds_left -= defuse_time
+#                 matrix[bomb_row][bomb_col] = 'D'
+#                 print("Counter-terrorist wins!")
+#                 print(f"Bomb has been defused: {seconds_left} second/s remaining.")
+#                 break
+#             else:
+#                 matrix[bomb_row][bomb_col] = 'X'
+#                 time_needed = defuse_time - seconds_left
+#                 print('Terrorists win!')
+#                 print('Bomb was not defused successfully!')
+#                 print(f'Time needed: {time_needed} second/s.')
+#                 break
+# 
+#         elif direction == 'defuse' and not (pl_row, pl_col) == (bomb_row, bomb_col):
+#             seconds_left -= 2
+#             continue
+# 
+#         next_row, next_col = next_move(pl_row, pl_col, direction, rows, cols)
+#         seconds_left -= 1
+# 
+#         if seconds_left == 0:
+#             print('Terrorists win!')
+#             print('Bomb was not defused successfully!')
+#             print(f'Time needed: 0 second/s.')
+#             break
+# 
+#         if next_row is None or next_col is None:
+#             continue
+# 
+#         if matrix[next_row][next_col] == terrorist:
+#             matrix[next_row][next_col] = empty
+#             print("Terrorists win!")
+#             break
+# 
+#         if not matrix[next_row][next_col] != bomb:
+#             matrix[pl_row][pl_col] = empty
+#         pl_row, pl_col = next_row, next_col
+# 
+#     matrix[start_row][start_col] = player
+#     for row in matrix:
+#         print(''.join(row))
+# 
+# 
+# if __name__ == '__main__':
+#     main()
 
-#################################################################################################################################################################################################
+
+
+############################################################################
 # def is_valid_index(idx, value):
 #     return 0 <= idx < value
 #
@@ -192,7 +294,7 @@ if __name__ == '__main__':
 
 
 
-##########################################################################################################################################################################################
+#####################################################################
 # def is_valid_index(idx, value):
 #     return 0 <= idx < value
 #
