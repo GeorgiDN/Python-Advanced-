@@ -24,10 +24,6 @@ def next_move(pl_row, pl_col, direction, rows):
     d_row, d_col = moves[direction][0], moves[direction][1]
     next_row = (pl_row + d_row) if is_valid_index(pl_row + d_row, rows) else None
     next_col = (pl_col + d_col) if is_valid_index(pl_col + d_col, rows) else None
-
-    # next_row = (pl_row + d_row) % rows
-    # next_col = (pl_col + d_col) % rows
-
     return next_row, next_col
 
 
